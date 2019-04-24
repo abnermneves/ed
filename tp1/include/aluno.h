@@ -11,6 +11,11 @@ private:
     unsigned int s; //segunda opcao
     
 public:
+    Aluno(std::string nome,
+          unsigned int nota,
+          unsigned int p,
+          unsigned int s);
+    ~Aluno();
     
 };
 

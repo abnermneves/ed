@@ -2,16 +2,20 @@
 #define CURSO_H
 
 #include <string>
+#include "lista-classificados.h"
+#include "lista-espera.h"
 
 class Curso {
 private:
-    string nome;
+    std::string nome;
     unsigned int vagas;
-    Classificados classificados;
-    Espera espera;
+    ListaClassificados* classificados;
+    ListaEspera* espera;
     
 public:
-
+    Curso(std::string nome, unsigned int vagas);
+    ~Curso();
+    
 };
 
 #endif
