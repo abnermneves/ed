@@ -5,10 +5,10 @@
 
 class ListaClassificados {
 private:
-    const unsigned int maxtam;
+    unsigned int maxtam;
     unsigned int primeiro;
     unsigned int ultimo;
-    Aluno* alunos[maxtam];
+    Aluno* lista;
     
 public:
     ListaClassificados(unsigned int maxtam);
