@@ -6,17 +6,22 @@
 class Aluno {
 private:
     std::string nome;
-    unsigned int nota;
+    float nota;
     unsigned int p; //primeira opcao
     unsigned int s; //segunda opcao
     
 public:
     Aluno();
     Aluno(std::string nome,
-          unsigned int nota,
+          float nota,
           unsigned int p,
           unsigned int s);
     ~Aluno();
+    
+    std::string get_nome();
+    float get_nota();
+    unsigned int get_p();
+    unsigned int get_s();
     
 };
 
