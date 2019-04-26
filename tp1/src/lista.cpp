@@ -1,4 +1,5 @@
 #include "lista.h"
+#include <iostream>
 
 Lista::Lista(){
     Celula* cabeca = new Celula();
@@ -13,16 +14,16 @@ Lista::~Lista(){
 
 void Lista::inserir(Aluno* aluno){
     Celula* c = new Celula(aluno);
-    this->ultimo->proximo = c;
+    this->ultimo->set_proximo(c);
     this->ultimo = c;
 }
 
 void Lista::imprimir(){
-    atual = this->primeiro->proximo;
+    Celula* atual = this->primeiro->get_proximo();
     while (atual != nullptr){
-        std::cout << atual->get_nome() << " "
-                  << atual->get_nota() << std::endl;
-        atual = atual->proximo;
+        std::cout << atual->get_aluno()->get_nome() << " "
+                  << atual->get_aluno()->get_nota() << std::endl;
+        atual = atual->get_proximo();
     }
 }
 
