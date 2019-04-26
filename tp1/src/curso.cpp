@@ -3,13 +3,11 @@
 Curso::Curso(std::string nome, unsigned int vagas){
     this->nome = nome;
     this->vagas = vagas;
-    //this->classificados = new ListaSequencial();
-    //this->ListaEspera = new ListaEspera();
+    //this->espera = new Lista();
 }
 
 Curso::~Curso(){
-    //this->classificados->~ListaSequencial();
-    //this->espera->~ListaEspera();
+    //this->espera->~Lista();
 }
 
 std::string Curso::get_nome(){

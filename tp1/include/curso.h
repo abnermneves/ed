@@ -2,15 +2,14 @@
 #define CURSO_H
 
 #include <string>
-#include "lista-sequencial.h"
-#include "lista-espera.h"
+#include "lista.h"
 
 class Curso {
 private:
     std::string nome;
     unsigned int vagas;
-    ListaSequencial* classificados;
-    ListaEspera* espera;
+    Lista* classificados;
+    Lista* espera;
     
 public:
     Curso(std::string nome, unsigned int vagas);
