@@ -5,18 +5,21 @@
 
 class Celula {
 private:
+    unsigned int posicao;
     Aluno* aluno;
-    Celula* proximo;
-    
+    Celula* proxima;
+
 public:
     Celula();
     Celula(Aluno* aluno);
     ~Celula();
-    
+
     Aluno* get_aluno();
-    Celula* get_proximo();
+    Celula* get_proxima();
+    unsigned int get_posicao();
     void set_aluno(Aluno* aluno);
-    void set_proximo(Celula* aluno);
+    void set_proxima(Celula* celula);
+    void set_posicao(unsigned int posicao);
 };
 
 #endif

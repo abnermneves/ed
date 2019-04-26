@@ -5,20 +5,21 @@
 
 class Lista {
 private:
-    Celula* primeiro;
-    Celula* ultimo;
+    Celula* primeira;
+    Celula* ultima;
     unsigned int tamanho;
-    
+
 public:
     Lista();
     ~Lista();
-    
+
     void inserir(Aluno* aluno);
     void imprimir();
     void esvaziar();
     bool vazia();
     unsigned int get_tamanho();
-    Aluno* retirar(unsigned int id);
+    Aluno* get_aluno(unsigned int posicao);
+    Celula* get_celula(unsigned int posicao);
 };
 
 #endif
