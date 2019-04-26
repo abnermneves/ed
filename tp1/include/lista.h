@@ -16,6 +16,7 @@ public:
     void inserir(Aluno* aluno);
     void imprimir();
     void esvaziar();
+    void ordenar();
     bool vazia();
     unsigned int get_tamanho();
     Aluno* get_aluno(unsigned int posicao);

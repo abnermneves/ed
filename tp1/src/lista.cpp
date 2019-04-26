@@ -14,6 +14,7 @@ Lista::~Lista(){
 
 void Lista::inserir(Aluno* aluno){
     Celula* c = new Celula(aluno);
+    c->set_anterior(this->ultima);
     this->ultima->set_proxima(c);
     this->ultima = c;
     this->tamanho++;
@@ -30,6 +31,11 @@ void Lista::imprimir(){
 }
 
 void Lista::esvaziar(){
+    this->ultima = this->primeira;
+    this->tamanho = 0;
+}
+
+void Lista::ordenar(){
 
 }
 

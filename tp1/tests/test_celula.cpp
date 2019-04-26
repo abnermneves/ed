@@ -6,6 +6,7 @@ TEST_CASE("Testando construtores"){
     Celula c1 = Celula();
     CHECK_EQ(c1.get_aluno(), nullptr);
     CHECK_EQ(c1.get_proxima(), nullptr);
+    CHECK_EQ(c1.get_anterior(), nullptr);
     CHECK_EQ(c1.get_posicao(), 0);
 
     Aluno* a = new Aluno("Marina", 998.0, 3, 1);
@@ -13,6 +14,7 @@ TEST_CASE("Testando construtores"){
     Celula* c2 = new Celula(a);
     CHECK_EQ(c2->get_aluno(), a);
     CHECK_EQ(c2->get_proxima(), nullptr);
+    CHECK_EQ(c2->get_anterior(), nullptr);
     CHECK_EQ(c2->get_posicao(), 0);
 
     delete a;
