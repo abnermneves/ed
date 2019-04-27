@@ -36,7 +36,39 @@ void Lista::esvaziar(){
 }
 
 void Lista::ordenar(){
+    Celula* atual = this->primeira;
+    Celula* anterior = atual->get_anterior();
+    Celula* prox = atual->get_proxima();
+    Celula* prox2 = prox;
 
+    if (this->get_tamanho() > 1){
+      atual = atual->get_proxima()->get_proxima();
+      anterior = atual->get_anterior();
+      prox = atual->get_proxima();
+      prox2 = prox;
+      float atualNota, anteriorNota;
+
+        while (prox2 != nullptr){
+            atualNota = atual->get_aluno()->get_nota();
+            anteriorNota = anterior->get_aluno()->get_nota();
+
+            while (anterior != this->primeira && atualNota < anteriorNota){
+                anterior->set_proxima(prox);
+                prox->set_anterior(anterior);
+                atual->set_proxima(anterior);
+                atual->set_anterior(anterior->get_anterior());
+                anterior->get_anterior()->set_proxima(atual);
+                anterior->set_anterior(atual);
+
+                anterior = atual->get_anterior();
+                prox = atual->get_proxima();
+                std::cout << "oi" << std::endl;
+            }
+            atual = prox2;
+            anterior = atual->get_anterior();
+            prox2 = atual->get_proxima();
+        }
+    }
 }
 
 bool Lista::vazia(){
