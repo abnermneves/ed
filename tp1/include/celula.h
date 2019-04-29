@@ -23,6 +23,7 @@ public:
     void set_proxima(Celula* celula);
     void set_anterior(Celula* celula);
     void set_posicao(unsigned int posicao);
+    void swap(Celula* anterior);
 };
 
 #endif
