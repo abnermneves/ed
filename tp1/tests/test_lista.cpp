@@ -52,7 +52,7 @@ TEST_CASE("Testando inserção"){
     delete a3;
 }
 
-TEST_CASE("Testando ordenação"){
+TEST_CASE("Testando ordenação 1"){
   Lista l = Lista();
   Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
   Aluno a2 = Aluno("Percoço", 680.04, 1, 4);
@@ -70,7 +70,6 @@ TEST_CASE("Testando ordenação"){
   l.inserir(&a7);
 
   l.ordenar();
-  l.imprimir();
   CHECK_EQ(l.get_aluno(1), &a5);
   CHECK_EQ(l.get_aluno(2), &a2);
   CHECK_EQ(l.get_aluno(3), &a1);
@@ -78,5 +77,77 @@ TEST_CASE("Testando ordenação"){
   CHECK_EQ(l.get_aluno(5), &a3);
   CHECK_EQ(l.get_aluno(6), &a7);
   CHECK_EQ(l.get_aluno(7), &a4);
+
+}
+
+TEST_CASE("Testando ordenação 2"){
+  //muda uns valores
+  Lista l = Lista();
+  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno("Percoço", 580.04, 1, 4);
+  Aluno a3 = Aluno("Zé Pikeno", 235.67, 3, 2);
+  Aluno a4 = Aluno("Wanda", 499.84, 1, 2);
+  Aluno a5 = Aluno("Séverine", 600.54, 4, 3);
+
+  l.inserir(&a1);
+  l.inserir(&a2);
+  l.inserir(&a3);
+  l.inserir(&a4);
+  l.inserir(&a5);
+
+  l.ordenar();
+  CHECK_EQ(l.get_aluno(1), &a3);
+  CHECK_EQ(l.get_aluno(2), &a4);
+  CHECK_EQ(l.get_aluno(3), &a2);
+  CHECK_EQ(l.get_aluno(4), &a5);
+  CHECK_EQ(l.get_aluno(5), &a1);
+
+}
+
+TEST_CASE("Testando ordenação 3"){
+  //muda a inserção
+  Lista l = Lista();
+  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno("Percoço", 680.04, 1, 4);
+  Aluno a3 = Aluno("Zé Pikeno", 790.67, 3, 2);
+  Aluno a4 = Aluno("Wanda", 899.34, 1, 2);
+  Aluno a5 = Aluno("Séverine", 400.54, 4, 3);
+
+  l.inserir(&a4);
+  l.inserir(&a1);
+  l.inserir(&a2);
+  l.inserir(&a3);
+  l.inserir(&a5);
+
+  l.ordenar();
+  CHECK_EQ(l.get_aluno(1), &a5);
+  CHECK_EQ(l.get_aluno(2), &a2);
+  CHECK_EQ(l.get_aluno(3), &a1);
+  CHECK_EQ(l.get_aluno(4), &a3);
+  CHECK_EQ(l.get_aluno(5), &a4);
+
+}
+
+TEST_CASE("Testando ordenação 4"){
+  //muda a inserção
+  Lista l = Lista();
+  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno("Percoço", 680.04, 1, 4);
+  Aluno a3 = Aluno("Zé Pikeno", 790.67, 3, 2);
+  Aluno a4 = Aluno("Wanda", 899.34, 1, 2);
+  Aluno a5 = Aluno("Séverine", 400.54, 4, 3);
+
+  l.inserir(&a2);
+  l.inserir(&a1);
+  l.inserir(&a3);
+  l.inserir(&a4);
+  l.inserir(&a5);
+
+  l.ordenar();
+  CHECK_EQ(l.get_aluno(1), &a5);
+  CHECK_EQ(l.get_aluno(2), &a2);
+  CHECK_EQ(l.get_aluno(3), &a1);
+  CHECK_EQ(l.get_aluno(4), &a3);
+  CHECK_EQ(l.get_aluno(5), &a4);
 
 }
