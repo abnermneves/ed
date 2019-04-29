@@ -55,11 +55,8 @@ void Lista::ordenar(){
           prox2 = prox;
             atualNota = atual->get_aluno()->get_nota();
             anteriorNota = anterior->get_aluno()->get_nota();
-            //std::cout << "oi" << std::endl;
 
-            while (anterior != this->primeira && atualNota < anteriorNota){
-
-                //std::cout << atualNota << " < " << anteriorNota << std::endl << std::endl;
+            while (anterior != this->primeira && atualNota > anteriorNota){
                 //troca as celulas
                 anterior->set_proxima(prox);
                 if (prox != nullptr){
@@ -80,15 +77,8 @@ void Lista::ordenar(){
                   anteriorNota = anterior->get_aluno()->get_nota();
                 }
                 prox = atual->get_proxima();
-
-
-                //this->imprimir();
-                //std::cout << std::endl;
-                //std::cout << atualNota << " " << anteriorNota << std::endl << std::endl;
             }
-            //std::cout << atualNota << " oi " << anteriorNota << std::endl << std::endl;
             atual = prox2;
-
         }
     }
 }

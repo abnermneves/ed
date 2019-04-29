@@ -3,7 +3,8 @@
 Curso::Curso(std::string nome, unsigned int vagas){
     this->nome = nome;
     this->vagas = vagas;
-    //this->espera = new Lista();
+    this->classificados = new Lista();
+    this->espera = new Lista();
 }
 
 Curso::~Curso(){

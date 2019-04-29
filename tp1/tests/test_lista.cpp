@@ -70,13 +70,13 @@ TEST_CASE("Testando ordenação 1"){
   l.inserir(&a7);
 
   l.ordenar();
-  CHECK_EQ(l.get_aluno(1), &a5);
-  CHECK_EQ(l.get_aluno(2), &a2);
-  CHECK_EQ(l.get_aluno(3), &a1);
+  CHECK_EQ(l.get_aluno(7), &a5);
+  CHECK_EQ(l.get_aluno(6), &a2);
+  CHECK_EQ(l.get_aluno(5), &a1);
   CHECK_EQ(l.get_aluno(4), &a6);
-  CHECK_EQ(l.get_aluno(5), &a3);
-  CHECK_EQ(l.get_aluno(6), &a7);
-  CHECK_EQ(l.get_aluno(7), &a4);
+  CHECK_EQ(l.get_aluno(3), &a3);
+  CHECK_EQ(l.get_aluno(2), &a7);
+  CHECK_EQ(l.get_aluno(1), &a4);
 
 }
 
@@ -96,11 +96,11 @@ TEST_CASE("Testando ordenação 2"){
   l.inserir(&a5);
 
   l.ordenar();
-  CHECK_EQ(l.get_aluno(1), &a3);
-  CHECK_EQ(l.get_aluno(2), &a4);
+  CHECK_EQ(l.get_aluno(5), &a3);
+  CHECK_EQ(l.get_aluno(4), &a4);
   CHECK_EQ(l.get_aluno(3), &a2);
-  CHECK_EQ(l.get_aluno(4), &a5);
-  CHECK_EQ(l.get_aluno(5), &a1);
+  CHECK_EQ(l.get_aluno(2), &a5);
+  CHECK_EQ(l.get_aluno(1), &a1);
 
 }
 
@@ -120,11 +120,11 @@ TEST_CASE("Testando ordenação 3"){
   l.inserir(&a5);
 
   l.ordenar();
-  CHECK_EQ(l.get_aluno(1), &a5);
-  CHECK_EQ(l.get_aluno(2), &a2);
+  CHECK_EQ(l.get_aluno(5), &a5);
+  CHECK_EQ(l.get_aluno(4), &a2);
   CHECK_EQ(l.get_aluno(3), &a1);
-  CHECK_EQ(l.get_aluno(4), &a3);
-  CHECK_EQ(l.get_aluno(5), &a4);
+  CHECK_EQ(l.get_aluno(2), &a3);
+  CHECK_EQ(l.get_aluno(1), &a4);
 
 }
 
@@ -144,10 +144,10 @@ TEST_CASE("Testando ordenação 4"){
   l.inserir(&a5);
 
   l.ordenar();
-  CHECK_EQ(l.get_aluno(1), &a5);
-  CHECK_EQ(l.get_aluno(2), &a2);
+  CHECK_EQ(l.get_aluno(5), &a5);
+  CHECK_EQ(l.get_aluno(4), &a2);
   CHECK_EQ(l.get_aluno(3), &a1);
-  CHECK_EQ(l.get_aluno(4), &a3);
-  CHECK_EQ(l.get_aluno(5), &a4);
+  CHECK_EQ(l.get_aluno(2), &a3);
+  CHECK_EQ(l.get_aluno(1), &a4);
 
 }
