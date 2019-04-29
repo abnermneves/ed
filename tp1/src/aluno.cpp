@@ -13,10 +13,6 @@ Aluno::Aluno(unsigned int id,
     this->s = s;
 }
 
-Aluno::Aluno(){
-
-}
-
 Aluno::~Aluno(){
 
 }

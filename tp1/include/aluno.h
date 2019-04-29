@@ -12,7 +12,6 @@ private:
     unsigned int s; //segunda opcao
 
 public:
-    Aluno();
     Aluno(unsigned int id,
           std::string nome,
           float nota,

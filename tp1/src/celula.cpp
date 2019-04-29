@@ -51,7 +51,7 @@ void Celula::set_posicao(unsigned int posicao){
     this->posicao = posicao;
 }
 
-void Celula::swap(Celula* anterior){
+void Celula::trocar(Celula* anterior){
   Celula* posterior = this->get_proxima();
   Celula* trasAnterior = anterior->get_anterior();
 
@@ -68,7 +68,7 @@ void Celula::swap(Celula* anterior){
   anterior->set_anterior(this);
 
   //thisiza as posicoes
-  pos = anterior->get_posicao();
+  unsigned int pos = anterior->get_posicao();
   anterior->set_posicao(this->get_posicao());
   this->set_posicao(pos);
 }
