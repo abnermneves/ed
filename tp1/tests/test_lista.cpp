@@ -12,9 +12,9 @@ TEST_CASE("Testando construtor"){
 
 TEST_CASE("Testando inserção"){
     Lista* l = new Lista();
-    Aluno* a1 = new Aluno("Samantha!", 700.51, 3, 2);
-    Aluno* a2 = new Aluno("Percoço", 680.04, 1, 4);
-    Aluno* a3 = new Aluno("Zé Pikeno", 790.67, 3, 2);
+    Aluno* a1 = new Aluno(0, "Samantha!", 700.51, 3, 2);
+    Aluno* a2 = new Aluno(1, "Percoço", 680.04, 1, 4);
+    Aluno* a3 = new Aluno(2, "Zé Pikeno", 790.67, 3, 2);
 
     Celula* cabeca = l->get_celula(0);
     l->inserir(a1);
@@ -54,13 +54,13 @@ TEST_CASE("Testando inserção"){
 
 TEST_CASE("Testando ordenação 1"){
   Lista l = Lista();
-  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
-  Aluno a2 = Aluno("Percoço", 680.04, 1, 4);
-  Aluno a3 = Aluno("Zé Pikeno", 790.67, 3, 2);
-  Aluno a4 = Aluno("Wanda", 899.34, 1, 2);
-  Aluno a5 = Aluno("Séverine", 400.54, 4, 3);
-  Aluno a6 = Aluno("Chacal", 789.34, 1, 2);
-  Aluno a7 = Aluno("Zé Grande", 790.68, 1, 2);
+  Aluno a1 = Aluno(1, "Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno(2, "Percoço", 680.04, 1, 4);
+  Aluno a3 = Aluno(3, "Zé Pikeno", 790.67, 3, 2);
+  Aluno a4 = Aluno(4, "Wanda", 899.34, 1, 2);
+  Aluno a5 = Aluno(5, "Séverine", 400.54, 4, 3);
+  Aluno a6 = Aluno(6, "Chacal", 789.34, 1, 2);
+  Aluno a7 = Aluno(7, "Zé Grande", 790.68, 1, 2);
   l.inserir(&a1);
   l.inserir(&a2);
   l.inserir(&a3);
@@ -83,11 +83,11 @@ TEST_CASE("Testando ordenação 1"){
 TEST_CASE("Testando ordenação 2"){
   //muda uns valores
   Lista l = Lista();
-  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
-  Aluno a2 = Aluno("Percoço", 580.04, 1, 4);
-  Aluno a3 = Aluno("Zé Pikeno", 235.67, 3, 2);
-  Aluno a4 = Aluno("Wanda", 499.84, 1, 2);
-  Aluno a5 = Aluno("Séverine", 600.54, 4, 3);
+  Aluno a1 = Aluno(1, "Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno(2, "Percoço", 580.04, 1, 4);
+  Aluno a3 = Aluno(3, "Zé Pikeno", 235.67, 3, 2);
+  Aluno a4 = Aluno(4, "Wanda", 499.84, 1, 2);
+  Aluno a5 = Aluno(5, "Séverine", 600.54, 4, 3);
 
   l.inserir(&a1);
   l.inserir(&a2);
@@ -107,11 +107,11 @@ TEST_CASE("Testando ordenação 2"){
 TEST_CASE("Testando ordenação 3"){
   //muda a inserção
   Lista l = Lista();
-  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
-  Aluno a2 = Aluno("Percoço", 680.04, 1, 4);
-  Aluno a3 = Aluno("Zé Pikeno", 790.67, 3, 2);
-  Aluno a4 = Aluno("Wanda", 899.34, 1, 2);
-  Aluno a5 = Aluno("Séverine", 400.54, 4, 3);
+  Aluno a1 = Aluno(1, "Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno(2, "Percoço", 680.04, 1, 4);
+  Aluno a3 = Aluno(3, "Zé Pikeno", 790.67, 3, 2);
+  Aluno a4 = Aluno(4, "Wanda", 899.34, 1, 2);
+  Aluno a5 = Aluno(5, "Séverine", 400.54, 4, 3);
 
   l.inserir(&a4);
   l.inserir(&a1);
@@ -131,11 +131,11 @@ TEST_CASE("Testando ordenação 3"){
 TEST_CASE("Testando ordenação 4"){
   //muda a inserção
   Lista l = Lista();
-  Aluno a1 = Aluno("Samantha!", 700.51, 3, 2);
-  Aluno a2 = Aluno("Percoço", 680.04, 1, 4);
-  Aluno a3 = Aluno("Zé Pikeno", 790.67, 3, 2);
-  Aluno a4 = Aluno("Wanda", 899.34, 1, 2);
-  Aluno a5 = Aluno("Séverine", 400.54, 4, 3);
+  Aluno a1 = Aluno(1, "Samantha!", 700.51, 3, 2);
+  Aluno a2 = Aluno(2, "Percoço", 680.04, 1, 4);
+  Aluno a3 = Aluno(3, "Zé Pikeno", 790.67, 3, 2);
+  Aluno a4 = Aluno(4, "Wanda", 899.34, 1, 2);
+  Aluno a5 = Aluno(5, "Séverine", 400.54, 4, 3);
 
   l.inserir(&a2);
   l.inserir(&a1);

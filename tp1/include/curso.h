@@ -6,17 +6,19 @@
 
 class Curso {
 private:
+    unsigned int id;
     std::string nome;
     unsigned int vagas;
     Lista* classificados;
     Lista* espera;
-    
+
 public:
-    Curso(std::string nome, unsigned int vagas);
+    Curso(unsigned int id, std::string nome, unsigned int vagas);
     ~Curso();
-    
+
     std::string get_nome();
     unsigned int get_vagas();
+    unsigned int get_id();
 };
 
 #endif

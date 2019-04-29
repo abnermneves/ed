@@ -1,10 +1,12 @@
 #include "aluno.h"
 
-Aluno::Aluno(std::string nome,
+Aluno::Aluno(unsigned int id,
+          std::string nome,
           float nota,
           unsigned int p,
           unsigned int s){
 
+    this->id = id;
     this->nome = nome;
     this->nota = nota;
     this->p = p;
@@ -12,7 +14,7 @@ Aluno::Aluno(std::string nome,
 }
 
 Aluno::Aluno(){
-    
+
 }
 
 Aluno::~Aluno(){
@@ -33,4 +35,8 @@ unsigned int Aluno::get_p(){
 
 unsigned int Aluno::get_s(){
     return this->s;
+}
+
+unsigned int Aluno::get_id(){
+    return this->id;
 }

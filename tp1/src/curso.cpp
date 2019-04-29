@@ -1,6 +1,7 @@
 #include "curso.h"
 
-Curso::Curso(std::string nome, unsigned int vagas){
+Curso::Curso(unsigned int id, std::string nome, unsigned int vagas){
+    this->id = id;
     this->nome = nome;
     this->vagas = vagas;
     this->classificados = new Lista();
@@ -17,4 +18,8 @@ std::string Curso::get_nome(){
 
 unsigned int Curso::get_vagas(){
     return this->vagas;
+}
+
+unsigned int Curso::get_id(){
+    return this->id;
 }
