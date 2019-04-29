@@ -70,7 +70,7 @@ TEST_CASE("Testando ordenação"){
   l.inserir(&a7);
 
   l.ordenar();
-
+  l.imprimir();
   CHECK_EQ(l.get_aluno(1), &a5);
   CHECK_EQ(l.get_aluno(2), &a2);
   CHECK_EQ(l.get_aluno(3), &a1);

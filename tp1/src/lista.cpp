@@ -41,32 +41,54 @@ void Lista::ordenar(){
     Celula* prox = atual->get_proxima();
     Celula* prox2 = prox;
 
-    if (this->get_tamanho() > 1){
-      atual = atual->get_proxima()->get_proxima();
-      anterior = atual->get_anterior();
-      prox = atual->get_proxima();
-      prox2 = prox;
-      float atualNota, anteriorNota;
 
-        while (prox2 != nullptr){
+    if (this->get_tamanho() > 1){
+      //se tem mais de 1 elemento, entao comeca a partir do segundo
+      atual = atual->get_proxima()->get_proxima();
+
+      float atualNota, anteriorNota;
+      unsigned int pos;
+
+        while (atual != nullptr){
+          anterior = atual->get_anterior();
+          prox = atual->get_proxima();
+          prox2 = prox;
             atualNota = atual->get_aluno()->get_nota();
             anteriorNota = anterior->get_aluno()->get_nota();
+            //std::cout << "oi" << std::endl;
 
             while (anterior != this->primeira && atualNota < anteriorNota){
+
+                //std::cout << atualNota << " < " << anteriorNota << std::endl << std::endl;
+                //troca as celulas
                 anterior->set_proxima(prox);
-                prox->set_anterior(anterior);
+                if (prox != nullptr){
+                  prox->set_anterior(anterior);
+                }
                 atual->set_proxima(anterior);
                 atual->set_anterior(anterior->get_anterior());
                 anterior->get_anterior()->set_proxima(atual);
                 anterior->set_anterior(atual);
 
+                //atualiza as posicoes
+                pos = anterior->get_posicao();
+                anterior->set_posicao(atual->get_posicao());
+                atual->set_posicao(pos);
+
                 anterior = atual->get_anterior();
+                if (anterior != this->primeira){
+                  anteriorNota = anterior->get_aluno()->get_nota();
+                }
                 prox = atual->get_proxima();
-                std::cout << "oi" << std::endl;
+
+
+                //this->imprimir();
+                //std::cout << std::endl;
+                //std::cout << atualNota << " " << anteriorNota << std::endl << std::endl;
             }
+            //std::cout << atualNota << " oi " << anteriorNota << std::endl << std::endl;
             atual = prox2;
-            anterior = atual->get_anterior();
-            prox2 = atual->get_proxima();
+
         }
     }
 }

@@ -17,7 +17,7 @@ int main () {
   l.inserir(&a4);
   l.inserir(&a5);
   l.inserir(&a6);
-  //l.inserir(&a7);
+  l.inserir(&a7);
 
   l.ordenar();
   l.imprimir();
