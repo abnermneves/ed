@@ -8,6 +8,13 @@ TEST_CASE("Testando construtor"){
     CHECK_EQ(l1->get_celula(0), l1->get_celula(l1->get_tamanho()));
 
     delete l1;
+
+    Lista<Curso*>* l2 = new Lista<Curso*>();
+    CHECK_EQ(l2->get_tamanho(), 0);
+    CHECK_EQ(l2->get_celula(0)->get_proxima(), nullptr);
+    CHECK_EQ(l2->get_celula(0), l2->get_celula(l2->get_tamanho()));
+
+    delete l2;
 }
 
 TEST_CASE("Testando inserção"){

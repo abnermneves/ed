@@ -7,6 +7,10 @@ MiniSisu::MiniSisu(){
     this->alunos = new Lista<Aluno*>();
 }
 
+void ler(){
+    
+}
+
 void MiniSisu::ordenar_alunos(){
     //a primeira é a célula cabeça
     Celula<Aluno*>* primeira = this->alunos->get_celula(0);
