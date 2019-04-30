@@ -1,3 +1,4 @@
+#include <iostream>
 #include "aluno.h"
 
 Aluno::Aluno(unsigned int id,
@@ -35,4 +36,8 @@ unsigned int Aluno::get_s(){
 
 unsigned int Aluno::get_id(){
     return this->id;
+}
+
+void Aluno::imprimir(){
+    std::cout << this->nome << " " << this->nota << std::endl;
 }

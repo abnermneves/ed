@@ -1,19 +1,25 @@
-#include "lista.h"
 #include <iostream>
+#include "lista.h"
 
-Lista::Lista(){
-    Celula* cabeca = new Celula();
+template class Lista<Curso*>;
+template class Lista<Aluno*>;
+
+template <typename T>
+Lista<T>::Lista(){
+    Celula<T>* cabeca = new Celula<T>();
     this->primeira = cabeca;
     this->ultima = cabeca;
     this->tamanho = 0;
 }
 
-Lista::~Lista(){
+template <typename T>
+Lista<T>::~Lista(){
 
 }
 
-void Lista::inserir(Aluno* aluno){
-    Celula* c = new Celula(aluno);
+template <typename T>
+void Lista<T>::inserir(T objeto){
+    Celula<T>* c = new Celula<T>(objeto);
     c->set_anterior(this->ultima);
     this->ultima->set_proxima(c);
     this->ultima = c;
@@ -21,36 +27,41 @@ void Lista::inserir(Aluno* aluno){
     c->set_posicao(this->get_tamanho());
 }
 
-void Lista::imprimir(){
-    Celula* atual = this->primeira->get_proxima();
+template <typename T>
+void Lista<T>::imprimir(){
+    Celula<T>* atual = this->primeira->get_proxima();
     while (atual != nullptr){
-        std::cout << atual->get_aluno()->get_nome() << " "
-                  << atual->get_aluno()->get_nota() << std::endl;
+        atual->get_objeto()->imprimir();
         atual = atual->get_proxima();
     }
 }
 
-void Lista::esvaziar(){
+template <typename T>
+void Lista<T>::esvaziar(){
     this->ultima = this->primeira;
     this->tamanho = 0;
 }
 
-bool Lista::vazia(){
+template <typename T>
+bool Lista<T>::vazia(){
     return this->primeira == this->ultima;
 }
 
-unsigned int Lista::get_tamanho(){
+template <typename T>
+unsigned int Lista<T>::get_tamanho(){
     return this->tamanho;
 }
 
-Celula* Lista::get_celula(unsigned int posicao){
-    Celula* atual = this->primeira;
+template <typename T>
+Celula<T>* Lista<T>::get_celula(unsigned int posicao){
+    Celula<T>* atual = this->primeira;
     while (atual->get_posicao() != posicao){
         atual = atual->get_proxima();
     }
     return atual;
 }
 
-Aluno* Lista::get_aluno(unsigned int posicao){
-    return this->get_celula(posicao)->get_aluno();
+template <typename T>
+T Lista<T>::get_objeto(unsigned int posicao){
+    return this->get_celula(posicao)->get_objeto();
 }

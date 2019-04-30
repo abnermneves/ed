@@ -1,11 +1,13 @@
+#include <iostream>
 #include "curso.h"
 
 Curso::Curso(unsigned int id, std::string nome, unsigned int vagas){
     this->id = id;
     this->nome = nome;
     this->vagas = vagas;
-    this->classificados = new Lista();
-    this->espera = new Lista();
+    this->nota_corte = 0;
+    this->classificados = new Lista<Aluno*>();
+    this->espera = new Lista<Aluno*>();
 }
 
 Curso::~Curso(){
@@ -22,4 +24,8 @@ unsigned int Curso::get_vagas(){
 
 unsigned int Curso::get_id(){
     return this->id;
+}
+
+void Curso::imprimir(){
+  std::cout << this->nome << " " << this->nota_corte << std::endl;
 }

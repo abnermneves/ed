@@ -5,7 +5,7 @@
 
 int main () {
     MiniSisu* sisu = new MiniSisu();
-    Lista* l = sisu->get_lista_alunos();
+    Lista<Aluno*>* l = sisu->get_lista_alunos();
     Aluno a1 = Aluno(1, "Samantha!", 700.51, 3, 2);
     Aluno a2 = Aluno(2, "Percoço", 580.04, 1, 4);
     Aluno a3 = Aluno(3, "Zé Pikeno", 235.67, 3, 2);

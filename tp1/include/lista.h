@@ -3,23 +3,27 @@
 
 #include "celula.h"
 
+template <typename T>
+class Celula;
+
+template <typename T>
 class Lista {
 private:
-    Celula* primeira;
-    Celula* ultima;
+    Celula<T>* primeira;
+    Celula<T>* ultima;
     unsigned int tamanho;
 
 public:
     Lista();
     ~Lista();
 
-    void inserir(Aluno* aluno);
+    void inserir(T objeto);
     void imprimir();
     void esvaziar();
     bool vazia();
     unsigned int get_tamanho();
-    Aluno* get_aluno(unsigned int posicao);
-    Celula* get_celula(unsigned int posicao);
+    T get_objeto(unsigned int posicao);
+    Celula<T>* get_celula(unsigned int posicao);
 };
 
 #endif

@@ -1,59 +1,75 @@
 #include "celula.h"
 #include "aluno.h"
+#include "curso.h"
 
-Celula::Celula(){
-    this->aluno = nullptr;
+template class Celula<Aluno*>;
+template class Celula<Curso*>;
+
+template <typename T>
+Celula<T>::Celula(){
+    this->objeto = nullptr;
     this->proxima = nullptr;
     this->anterior = nullptr;
     this->posicao = 0;
 }
 
-Celula::Celula(Aluno* aluno){
-    this->aluno = aluno;
+template <typename T>
+Celula<T>::Celula(T objeto){
+    this->objeto = objeto;
     this->proxima = nullptr;
     this->anterior = nullptr;
     this->posicao = 0;
 }
 
-Celula::~Celula(){
+template <typename T>
+Celula<T>::~Celula(){
 
 }
 
-Aluno* Celula::get_aluno(){
-    return this->aluno;
+template <typename T>
+T Celula<T>::get_objeto(){
+    return this->objeto;
 }
 
-Celula* Celula::get_proxima(){
+template <typename T>
+Celula<T>* Celula<T>::get_proxima(){
     return this->proxima;
 }
 
-Celula* Celula::get_anterior(){
+template <typename T>
+Celula<T>* Celula<T>::get_anterior(){
     return this->anterior;
 }
 
-unsigned int Celula::get_posicao(){
+template <typename T>
+unsigned int Celula<T>::get_posicao(){
     return this->posicao;
 }
 
-void Celula::set_aluno(Aluno* aluno){
-    this->aluno = aluno;
+template <typename T>
+void Celula<T>::set_objeto(T objeto){
+    this->objeto = objeto;
 }
 
-void Celula::set_proxima(Celula* celula){
+template <typename T>
+void Celula<T>::set_proxima(Celula<T>* celula){
     this->proxima = celula;
 }
 
-void Celula::set_anterior(Celula* celula){
+template <typename T>
+void Celula<T>::set_anterior(Celula<T>* celula){
     this->anterior = celula;
 }
 
-void Celula::set_posicao(unsigned int posicao){
+template <typename T>
+void Celula<T>::set_posicao(unsigned int posicao){
     this->posicao = posicao;
 }
 
-void Celula::trocar(Celula* anterior){
-  Celula* posterior = this->get_proxima();
-  Celula* trasAnterior = anterior->get_anterior();
+template <typename T>
+void Celula<T>::trocar(Celula<T>* anterior){
+  Celula<T>* posterior = this->get_proxima();
+  Celula<T>* trasAnterior = anterior->get_anterior();
 
   anterior->set_proxima(posterior);
 
