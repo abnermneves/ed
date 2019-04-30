@@ -14,10 +14,17 @@ void MiniSisu::ler(){
 
     std::cin >> n >> m;
     for (unsigned int i = 0; i < n; i++){
-        std::cin >> nome;
+        std::getline(std::cin, nome);
         std::cin >> vagas;
         Curso* curso = new Curso(i, nome, vagas);
         this->cursos->inserir(curso);
+    }
+
+    for (unsigned int i = 0; i < m; i++){
+        std::getline(std::cin, nome);
+        std::cin >> nota >> p >> s;
+        Aluno* aluno = new Aluno(i, nome, nota, p, s);
+        this->alunos->inserir(aluno);
     }
 }
 
@@ -66,4 +73,9 @@ Lista<Curso*>* MiniSisu::get_lista_cursos(){
 
 Lista<Aluno*>* MiniSisu::get_lista_alunos(){
     return this->alunos;
+}
+
+void MiniSisu::imprimir(){
+    this->cursos->imprimir();
+    this->alunos->imprimir();
 }
