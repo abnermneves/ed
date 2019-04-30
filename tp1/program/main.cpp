@@ -21,6 +21,9 @@ int main () {
     sisu->ordenar_alunos();
     l->imprimir();
 
+    sisu->ler();
+    sisu->get_lista_cursos()->imprimir();
+
     delete sisu;
 
     return 0;

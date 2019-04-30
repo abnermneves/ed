@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "minisisu.h"
 #include "celula.h"
 
@@ -7,8 +8,17 @@ MiniSisu::MiniSisu(){
     this->alunos = new Lista<Aluno*>();
 }
 
-void ler(){
-    
+void MiniSisu::ler(){
+    unsigned int n, m, vagas, nota, p, s;
+    std::string nome;
+
+    std::cin >> n >> m;
+    for (unsigned int i = 0; i < n; i++){
+        std::cin >> nome;
+        std::cin >> vagas;
+        Curso* curso = new Curso(i, nome, vagas);
+        this->cursos->inserir(curso);
+    }
 }
 
 void MiniSisu::ordenar_alunos(){
