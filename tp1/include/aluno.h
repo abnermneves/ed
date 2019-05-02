@@ -25,6 +25,7 @@ public:
     unsigned int get_s();
     unsigned int get_id();
     void imprimir();
+    void imprimir_entrada();
 
 };
 

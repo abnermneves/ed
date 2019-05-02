@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "curso.h"
 
 Curso::Curso(unsigned int id, std::string nome, unsigned int vagas){
@@ -27,5 +28,11 @@ unsigned int Curso::get_id(){
 }
 
 void Curso::imprimir(){
-  std::cout << this->nome << " " << this->nota_corte << std::endl;
+    std::cout << this->nome << " "
+              << std::setprecision(2)
+              << this->nota_corte << std::endl;
+}
+
+void Curso::imprimir_entrada(){
+    std::cout << this->nome << " " << this->vagas << std::endl;
 }

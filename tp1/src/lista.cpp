@@ -37,6 +37,15 @@ void Lista<T>::imprimir(){
 }
 
 template <typename T>
+void Lista<T>::imprimir_entrada(){
+    Celula<T>* atual = this->primeira->get_proxima();
+    while (atual != nullptr){
+        atual->get_objeto()->imprimir_entrada();
+        atual = atual->get_proxima();
+    }
+}
+
+template <typename T>
 void Lista<T>::esvaziar(){
     this->ultima = this->primeira;
     this->tamanho = 0;

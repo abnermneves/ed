@@ -24,6 +24,7 @@ public:
     unsigned int get_tamanho();
     T get_objeto(unsigned int posicao);
     Celula<T>* get_celula(unsigned int posicao);
+    void imprimir_entrada();
 };
 
 #endif

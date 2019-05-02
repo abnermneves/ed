@@ -9,21 +9,27 @@ MiniSisu::MiniSisu(){
 }
 
 void MiniSisu::ler(){
-    unsigned int n, m, vagas, nota, p, s;
+    unsigned int n, m, vagas, p, s;
+    float nota;
     std::string nome;
+    Curso* curso;
+    Aluno* aluno;
 
     std::cin >> n >> m;
+    std::cin.ignore();
     for (unsigned int i = 0; i < n; i++){
         std::getline(std::cin, nome);
         std::cin >> vagas;
-        Curso* curso = new Curso(i, nome, vagas);
+        std::cin.ignore();
+        curso = new Curso(i, nome, vagas);
         this->cursos->inserir(curso);
     }
 
     for (unsigned int i = 0; i < m; i++){
         std::getline(std::cin, nome);
         std::cin >> nota >> p >> s;
-        Aluno* aluno = new Aluno(i, nome, nota, p, s);
+        std::cin.ignore();
+        aluno = new Aluno(i, nome, nota, p, s);
         this->alunos->inserir(aluno);
     }
 }
@@ -78,4 +84,9 @@ Lista<Aluno*>* MiniSisu::get_lista_alunos(){
 void MiniSisu::imprimir(){
     this->cursos->imprimir();
     this->alunos->imprimir();
+}
+
+void MiniSisu::imprimir_entrada(){
+    this->cursos->imprimir_entrada();
+    this->alunos->imprimir_entrada();
 }

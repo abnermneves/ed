@@ -24,6 +24,7 @@ public:
     unsigned int get_vagas();
     unsigned int get_id();
     void imprimir();
+    void imprimir_entrada();
 };
 
 #endif

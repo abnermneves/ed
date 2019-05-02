@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "aluno.h"
 
 Aluno::Aluno(unsigned int id,
@@ -39,5 +40,14 @@ unsigned int Aluno::get_id(){
 }
 
 void Aluno::imprimir(){
-    std::cout << this->nome << " " << this->nota << std::endl;
+    std::cout << this->nome << " "
+              << std::setprecision(2) << std::fixed
+              << this->nota << std::endl;
+}
+
+void Aluno::imprimir_entrada(){
+    std::cout << this->nome << " "
+              << std::setprecision(2) << std::fixed
+              << this->nota << " "
+              << p << " " << s << std::endl;
 }

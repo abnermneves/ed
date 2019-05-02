@@ -15,6 +15,7 @@ public:
     void ler();
     void ordenar_alunos();
     void imprimir();
+    void imprimir_entrada();
     Lista<Curso*>* get_lista_cursos();
     Lista<Aluno*>* get_lista_alunos();
 };
