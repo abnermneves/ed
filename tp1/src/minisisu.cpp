@@ -67,19 +67,23 @@ void MiniSisu::classificar(){
     //pra entrar no for, precisa ter mais de 1 aluno
     //aqui classifica só os alunos que não empataram
     for (unsigned int i = 1; i <= m; i++){
+        std::cout << "i: " << i << std::endl;
         aluno = alunos->get_objeto(i);
         notaAtual = aluno->get_nota();
         proximo = alunos->get_objeto(i+1);
-        if (proximo){
+        if (proximo != nullptr){
             notaProx = proximo->get_nota();
         }
 
         //encontra alunos com a nota igual à do atual
         unsigned int j = i;
-        while (proximo != nullptr && j <= m && notaAtual == notaProx){
+        while (proximo != nullptr && j < m && notaAtual == notaProx){
+            std::cout << "j: " << j << std::endl;
             aluno = proximo;
             proximo = alunos->get_objeto(j+2);
-            notaProx = proximo->get_nota();
+            if (proximo){
+                notaProx = proximo->get_nota();
+            }
             j++;
         }
 
@@ -103,6 +107,7 @@ void MiniSisu::classificar(){
             //agora, se houve empate de nota,
             //desempata e continua a partir do proximo
             this->desempatar(&i, &j);
+            m = alunos->get_tamanho();
             //i = j;
         }
     }
@@ -125,7 +130,7 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
 
         if (aprovado){
             alunos->remover(atual);
-            *i--;
+            //*i--;
             *j--;
             k--;
         }
@@ -136,7 +141,7 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
         cs = cursos->get_objeto(atual->get_s());
         aprovado = cs->classificar(atual);
         alunos->remover(atual);
-        *i--;
+        //*i--;
         *j--;
         k--;
     }
