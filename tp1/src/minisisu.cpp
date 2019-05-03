@@ -30,8 +30,6 @@ void MiniSisu::ler(){
         this->cursos->inserir(curso);
     }
 
-    Lista<Curso*>* cursos = this->get_lista_cursos();
-
     for (unsigned int i = 1; i <= m; i++){
         std::string nome;
         std::getline(std::cin, nome);
@@ -57,7 +55,6 @@ void MiniSisu::classificar(){
     Aluno* proximo = nullptr;
     auto alunos = this->alunos;
     auto cursos = this->cursos;
-    unsigned int n = cursos->get_tamanho();
     unsigned int m = alunos->get_tamanho();
     bool aprovado = 0;
     float notaAtual = 0;
@@ -93,7 +90,6 @@ void MiniSisu::classificar(){
         if (i == j){
             cp = cursos->get_objeto(aluno->get_p());
             aprovado = cp->classificar(aluno);
-
             
             if (!aprovado){
                 cs = cursos->get_objeto(aluno->get_s());
@@ -139,12 +135,14 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
 
     for (unsigned int k = *i; k <= *j; k++){
         atual = alunos->get_objeto(k);
-        cs = cursos->get_objeto(atual->get_s());
-        aprovado = cs->classificar(atual);
-        alunos->remover(atual);
-        //*i--;
-        *j--;
-        k--;
+        if (atual){
+            cs = cursos->get_objeto(atual->get_s());
+            aprovado = cs->classificar(atual);
+            alunos->remover(atual);
+            //*i--;
+            *j--;
+            k--;
+        }
     }
 }
 
