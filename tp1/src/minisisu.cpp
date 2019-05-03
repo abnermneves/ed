@@ -17,7 +17,7 @@ void MiniSisu::ler(){
 
     std::cin >> n >> m;
     std::cin.ignore();
-    for (unsigned int i = 0; i < n; i++){
+    for (unsigned int i = 1; i <= n; i++){
         std::getline(std::cin, nome);
         std::cin >> vagas;
         std::cin.ignore();
@@ -25,12 +25,26 @@ void MiniSisu::ler(){
         this->cursos->inserir(curso);
     }
 
-    for (unsigned int i = 0; i < m; i++){
+    Lista<Curso*>* cursos = this->get_lista_cursos();
+    cursos->imprimir();
+
+    for (unsigned int i = 1; i <= m; i++){
         std::getline(std::cin, nome);
         std::cin >> nota >> p >> s;
         std::cin.ignore();
+
+        //precisa aumentar 1 porque fiz a lista baseada
+        //no fato de que a celula cabeça tem indice 0
+        p++;
+        s++;
         aluno = new Aluno(i, nome, nota, p, s);
         this->alunos->inserir(aluno);
+
+        //insere o aluno na lista de po e so dos cursos escolhidos
+        curso = cursos->get_objeto(p);
+        curso->get_po()->inserir(aluno);
+        curso = cursos->get_objeto(s);
+        curso->get_so()->inserir(aluno);
     }
 }
 

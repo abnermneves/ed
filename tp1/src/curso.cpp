@@ -9,6 +9,8 @@ Curso::Curso(unsigned int id, std::string nome, unsigned int vagas){
     this->nota_corte = 0;
     this->classificados = new Lista<Aluno*>();
     this->espera = new Lista<Aluno*>();
+    this->po = new Lista<Aluno*>();
+    this->so = new Lista<Aluno*>();
 }
 
 Curso::~Curso(){
@@ -34,5 +36,16 @@ void Curso::imprimir(){
 }
 
 void Curso::imprimir_entrada(){
-    std::cout << this->nome << " " << this->vagas << std::endl;
+    std::cout << this->nome << " " << this->vagas << std::endl << "po" << std::endl;
+    this->po->imprimir_entrada();
+    std::cout << "so" << std::endl;
+    this->so->imprimir_entrada();
+}
+
+Lista<Aluno*>* Curso::get_po(){
+    return this->po;
+}
+
+Lista<Aluno*>* Curso::get_so(){
+    return this->so;
 }
