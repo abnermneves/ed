@@ -14,7 +14,14 @@ Lista<T>::Lista(){
 
 template <typename T>
 Lista<T>::~Lista(){
-
+    Celula<T>* atual = this->primeira;
+    Celula<T>* prox = atual->get_proxima();
+    while (prox != nullptr){
+        delete atual;
+        atual = prox;
+        prox = prox->get_proxima();
+    }
+    delete atual;
 }
 
 template <typename T>

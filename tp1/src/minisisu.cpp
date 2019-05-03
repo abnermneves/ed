@@ -8,17 +8,22 @@ MiniSisu::MiniSisu(){
     this->alunos = new Lista<Aluno*>();
 }
 
+MiniSisu::~MiniSisu(){
+    this->cursos->~Lista();
+    this->alunos->~Lista();
+}
+
 void MiniSisu::ler(){
-    unsigned int n, m, vagas, p, s;
-    float nota;
-    std::string nome;
-    Curso* curso;
-    Aluno* aluno;
+    unsigned int n = 0, m = 0;
+    Curso* curso = nullptr;
+    Aluno* aluno = nullptr;
 
     std::cin >> n >> m;
     std::cin.ignore();
     for (unsigned int i = 1; i <= n; i++){
+        std::string nome;
         std::getline(std::cin, nome);
+        unsigned int vagas = 0;
         std::cin >> vagas;
         std::cin.ignore();
         curso = new Curso(i, nome, vagas);
@@ -28,7 +33,10 @@ void MiniSisu::ler(){
     Lista<Curso*>* cursos = this->get_lista_cursos();
 
     for (unsigned int i = 1; i <= m; i++){
+        std::string nome;
         std::getline(std::cin, nome);
+        float nota = 0;
+        unsigned int p = 0, s = 0;
         std::cin >> nota >> p >> s;
         std::cin.ignore();
 
@@ -38,28 +46,22 @@ void MiniSisu::ler(){
         s++;
         aluno = new Aluno(i, nome, nota, p, s);
         this->alunos->inserir(aluno);
-
-        //insere o aluno na lista de po e so dos cursos escolhidos
-        curso = cursos->get_objeto(p);
-        curso->get_po()->inserir(aluno);
-        curso = cursos->get_objeto(s);
-        curso->get_so()->inserir(aluno);
     }
 }
 
 void MiniSisu::classificar(){
-    Curso* curso;
-    Curso* cp;
-    Curso* cs;
-    Aluno* aluno;
-    Aluno* proximo;
+    Curso* curso = nullptr;
+    Curso* cp = nullptr;
+    Curso* cs = nullptr;
+    Aluno* aluno = nullptr;
+    Aluno* proximo = nullptr;
     auto alunos = this->alunos;
     auto cursos = this->cursos;
     unsigned int n = cursos->get_tamanho();
     unsigned int m = alunos->get_tamanho();
-    bool aprovado;
-    float notaAtual;
-    float notaProx;
+    bool aprovado = 0;
+    float notaAtual = 0;
+    float notaProx = 0;
 
     this->ordenar_alunos();
     //this->imprimir_entrada();
@@ -70,41 +72,43 @@ void MiniSisu::classificar(){
         aluno = alunos->get_objeto(i);
         notaAtual = aluno->get_nota();
         proximo = alunos->get_objeto(i+1);
-        if (proximo){
+        if (proximo != nullptr){
             notaProx = proximo->get_nota();
         }
 
         //encontra alunos com a nota igual à do atual
         unsigned int j = i;
-        while (proximo != nullptr && j <= m && notaAtual == notaProx){
+        while (proximo != nullptr && j < m && notaAtual == notaProx){
+            
             aluno = proximo;
             proximo = alunos->get_objeto(j+2);
-            notaProx = proximo->get_nota();
+            if (proximo != nullptr){
+                notaProx = proximo->get_nota();
+            }
             j++;
         }
 
         //se não tem empate
         //então classifica o aluno atual
         if (i == j){
-            //std::cout << "OI CHEGUEI AQUI ALGUEM NAO EMATOU A NOTA" << std::endl;
             cp = cursos->get_objeto(aluno->get_p());
             aprovado = cp->classificar(aluno);
 
-            cs = cursos->get_objeto(aluno->get_s());
+            
             if (!aprovado){
-                cs->classificar(aluno);
+                cs = cursos->get_objeto(aluno->get_s());
+                aprovado = cs->classificar(aluno);
             }
 
             alunos->remover(aluno);
             i--;
-            m--;
+            j--;
         } else {
-            //std::cout << "OI CHEGUEI AQUI ALGUEM EMpATOU SIM A NOTA" << std::endl;
             //agora, se houve empate de nota,
             //desempata e continua a partir do proximo
             this->desempatar(&i, &j);
-            //i = j;
         }
+        m = alunos->get_tamanho();
     }
 
 }
@@ -113,21 +117,23 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
     auto alunos = this->alunos;
     auto cursos = this->cursos;
 
-    Aluno* atual;
-    Curso* cp;
-    Curso* cs;
+    Aluno* atual = nullptr;
+    Curso* cp = nullptr;
+    Curso* cs = nullptr;
     bool aprovado;
 
     for (unsigned int k = *i; k <= *j; k++){
         atual = alunos->get_objeto(k);
-        cp = cursos->get_objeto(atual->get_p());
-        aprovado = cp->classificar(atual);
+        if (atual){
+            cp = cursos->get_objeto(atual->get_p());
+            aprovado = cp->classificar(atual);
 
-        if (aprovado){
-            alunos->remover(atual);
-            *i--;
-            *j--;
-            k--;
+            if (aprovado){
+                alunos->remover(atual);
+                //*i--;
+                *j--;
+                k--;
+            }
         }
     }
 
@@ -136,45 +142,10 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
         cs = cursos->get_objeto(atual->get_s());
         aprovado = cs->classificar(atual);
         alunos->remover(atual);
-        *i--;
+        //*i--;
         *j--;
         k--;
     }
-/*
-    for (unsigned int i = 1; i <= n ; i++){
-        curso = this->cursos->get_objeto(i);
-        auto po = curso->get_po();
-        curso->ordenar_alunos(po);
-        m = po->get_tamanho();
-
-        for (unsigned int i = 1; i <= m; i++){
-            aluno = po->get_objeto(i);
-            aprovado = curso->classificar(aluno);
-
-            //se o aluno foi aprovado na primeira opção
-            //então ele não vai concorrer na segunda
-            if (aprovado){
-                unsigned int s = aluno->get_s();
-                auto cs = cursos->get_objeto(s);
-                if (cs != nullptr){
-                    cs->get_so()->remover(i);
-                }
-            }
-        }
-    }
-
-    for (unsigned int i = 1; i <= n ; i++){
-        curso = this->cursos->get_objeto(i);
-        auto so = curso->get_so();
-        curso->ordenar_alunos(so);
-        m = so->get_tamanho();
-
-        for (unsigned int i = 1; i <= m; i++){
-            aluno = so->get_objeto(i);
-            aprovado = curso->classificar(aluno);
-        }
-    }
-    */
 }
 
 Lista<Curso*>* MiniSisu::get_lista_cursos(){
@@ -195,6 +166,43 @@ void MiniSisu::imprimir_entrada(){
 }
 
 void MiniSisu::ordenar_alunos(){
-    Curso* aux = new Curso(1, "Auxiliar pra ordenação pq fui burro", 0);
-    aux->ordenar_alunos(this->alunos);
+    //a primeira é a célula cabeça
+    Celula<Aluno*>* primeira = this->alunos->get_celula(0);
+    //então atual começa na segunda célula
+    Celula<Aluno*>* atual = primeira->get_proxima();
+    Celula<Aluno*>* anterior = nullptr;
+    Celula<Aluno*>* prox = nullptr;
+    Celula<Aluno*>* prox2 = nullptr;
+    //tamanho é 0 se tiver só a célula cabeça
+    unsigned int tamanho = this->alunos->get_tamanho();
+
+    if (tamanho > 1){
+    //se tem mais de 1 celula com aluno, entao começa da segunda
+    atual = atual->get_proxima();
+    anterior = atual->get_anterior();
+    prox = atual->get_proxima();
+    prox2 = prox;
+
+    float atualNota, anteriorNota;
+
+      while (atual != nullptr){
+          anterior = atual->get_anterior();
+          prox = atual->get_proxima();
+          prox2 = prox;
+          atualNota = atual->get_objeto()->get_nota();
+          anteriorNota = anterior->get_objeto()->get_nota();
+
+          while (anterior != primeira && atualNota > anteriorNota){
+              //troca a celula atual com a anterior
+              atual->trocar(anterior);
+              //atualiza a anterior e proxima
+              anterior = atual->get_anterior();
+              prox = atual->get_proxima();
+              if (anterior != primeira){
+                  anteriorNota = anterior->get_objeto()->get_nota();
+              }
+          }
+          atual = prox2;
+      }
+    }
 }

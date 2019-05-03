@@ -9,12 +9,11 @@ Curso::Curso(unsigned int id, std::string nome, unsigned int vagas){
     this->nota_corte = 0;
     this->classificados = new Lista<Aluno*>();
     this->espera = new Lista<Aluno*>();
-    this->po = new Lista<Aluno*>();
-    this->so = new Lista<Aluno*>();
 }
 
 Curso::~Curso(){
-    //this->espera->~Lista();
+    this->classificados->~Lista();
+    this->espera->~Lista();
 }
 
 std::string Curso::get_nome(){
@@ -41,60 +40,7 @@ void Curso::imprimir(){
 }
 
 void Curso::imprimir_entrada(){
-    std::cout << this->nome << " " << this->vagas << std::endl << "po" << std::endl;
-    this->po->imprimir_entrada();
-    std::cout << "so" << std::endl;
-    this->so->imprimir_entrada();
-}
-
-Lista<Aluno*>* Curso::get_po(){
-    return this->po;
-}
-
-Lista<Aluno*>* Curso::get_so(){
-    return this->so;
-}
-
-void Curso::ordenar_alunos(Lista<Aluno*>* lista){
-  //a primeira é a célula cabeça
-  Celula<Aluno*>* primeira = lista->get_celula(0);
-  //então atual começa na segunda célula
-  Celula<Aluno*>* atual = primeira->get_proxima();
-  Celula<Aluno*>* anterior;
-  Celula<Aluno*>* prox;
-  Celula<Aluno*>* prox2;
-  //tamanho é 0 se tiver só a célula cabeça
-  unsigned int tamanho = lista->get_tamanho();
-
-  if (tamanho > 1){
-    //se tem mais de 1 celula com aluno, entao começa da segunda
-    atual = atual->get_proxima();
-    anterior = atual->get_anterior();
-    prox = atual->get_proxima();
-    prox2 = prox;
-
-    float atualNota, anteriorNota;
-
-      while (atual != nullptr){
-          anterior = atual->get_anterior();
-          prox = atual->get_proxima();
-          prox2 = prox;
-          atualNota = atual->get_objeto()->get_nota();
-          anteriorNota = anterior->get_objeto()->get_nota();
-
-          while (anterior != primeira && atualNota > anteriorNota){
-              //troca a celula atual com a anterior
-              atual->trocar(anterior);
-              //atualiza a anterior e proxima
-              anterior = atual->get_anterior();
-              prox = atual->get_proxima();
-              if (anterior != primeira){
-                  anteriorNota = anterior->get_objeto()->get_nota();
-              }
-          }
-          atual = prox2;
-      }
-  }
+    std::cout << this->nome << " " << this->vagas << std::endl;
 }
 
 bool Curso::classificar(Aluno* aluno){
