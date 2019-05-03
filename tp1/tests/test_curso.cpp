@@ -118,3 +118,14 @@ TEST_CASE("Testando ordenação 4"){
   CHECK_EQ(l->get_objeto(1), &a4);
 
 }
+
+TEST_CASE("Testando ordenação 5"){
+    Curso* curso = new Curso(1, "Maquiagem", 3);
+    Lista<Aluno*>* l = curso->get_po();
+    Aluno a = Aluno(1, "Olavo das Neves", 496.00, 0, 1);
+    curso->ordenar_alunos(l);
+    l->inserir(&a);
+
+    curso->ordenar_alunos(l);
+    CHECK_EQ(l->get_objeto(1), &a);
+}

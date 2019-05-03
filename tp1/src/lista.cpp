@@ -77,6 +77,9 @@ T Lista<T>::get_objeto(unsigned int posicao){
 
 template <typename T>
 void Lista<T>::remover(unsigned int posicao){
+    if (posicao <= 0 || posicao > this->get_tamanho()){
+        return;
+    }
     Celula<T>* celula = this->get_celula(posicao);
     Celula<T>* anterior = celula->get_anterior();
     Celula<T>* posterior = celula->get_proxima();

@@ -60,15 +60,18 @@ void Curso::ordenar_alunos(Lista<Aluno*>* lista){
   Celula<Aluno*>* primeira = lista->get_celula(0);
   //então atual começa na segunda célula
   Celula<Aluno*>* atual = primeira->get_proxima();
-  Celula<Aluno*>* anterior = atual->get_anterior();
-  Celula<Aluno*>* prox = atual->get_proxima();
-  Celula<Aluno*>* prox2 = prox;
+  Celula<Aluno*>* anterior;
+  Celula<Aluno*>* prox;
+  Celula<Aluno*>* prox2;
   //tamanho é 0 se tiver só a célula cabeça
   unsigned int tamanho = lista->get_tamanho();
 
   if (tamanho > 1){
     //se tem mais de 1 celula com aluno, entao começa da segunda
     atual = atual->get_proxima();
+    anterior = atual->get_anterior();
+    prox = atual->get_proxima();
+    prox2 = prox;
 
     float atualNota, anteriorNota;
 

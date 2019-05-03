@@ -68,7 +68,10 @@ void MiniSisu::classificar(){
             //então ele não vai concorrer na segunda
             if (aprovado){
                 unsigned int s = aluno->get_s();
-                cursos->get_objeto(s)->get_so()->remover(i);
+                auto cs = cursos->get_objeto(s);
+                if (cs != nullptr){
+                    cs->get_so()->remover(i);
+                }
             }
         }
     }
