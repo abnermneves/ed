@@ -103,7 +103,7 @@ void MiniSisu::classificar(){
             //agora, se houve empate de nota,
             //desempata e continua a partir do proximo
             this->desempatar(&i, &j);
-            i = j;
+            //i = j;
         }
     }
 
@@ -125,7 +125,9 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
 
         if (aprovado){
             alunos->remover(atual);
+            *i--;
             *j--;
+            k--;
         }
     }
 
@@ -134,6 +136,9 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
         cs = cursos->get_objeto(atual->get_s());
         aprovado = cs->classificar(atual);
         alunos->remover(atual);
+        *i--;
+        *j--;
+        k--;
     }
 /*
     for (unsigned int i = 1; i <= n ; i++){
