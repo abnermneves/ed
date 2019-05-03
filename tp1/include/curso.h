@@ -29,6 +29,8 @@ public:
     void imprimir_entrada();
     Lista<Aluno*>* get_po();
     Lista<Aluno*>* get_so();
+    void ordenar_alunos(Lista<Aluno*>* lista);
+    bool classificar(Aluno* aluno);
 };
 
 #endif

@@ -49,3 +49,46 @@ Lista<Aluno*>* Curso::get_po(){
 Lista<Aluno*>* Curso::get_so(){
     return this->so;
 }
+
+void Curso::ordenar_alunos(Lista<Aluno*>* lista){
+  //a primeira é a célula cabeça
+  Celula<Aluno*>* primeira = lista->get_celula(0);
+  //então atual começa na segunda célula
+  Celula<Aluno*>* atual = primeira->get_proxima();
+  Celula<Aluno*>* anterior = atual->get_anterior();
+  Celula<Aluno*>* prox = atual->get_proxima();
+  Celula<Aluno*>* prox2 = prox;
+  //tamanho é 0 se tiver só a célula cabeça
+  unsigned int tamanho = lista->get_tamanho();
+
+  if (tamanho > 1){
+    //se tem mais de 1 celula com aluno, entao começa da segunda
+    atual = atual->get_proxima();
+
+    float atualNota, anteriorNota;
+
+      while (atual != nullptr){
+          anterior = atual->get_anterior();
+          prox = atual->get_proxima();
+          prox2 = prox;
+          atualNota = atual->get_objeto()->get_nota();
+          anteriorNota = anterior->get_objeto()->get_nota();
+
+          while (anterior != primeira && atualNota > anteriorNota){
+              //troca a celula atual com a anterior
+              atual->trocar(anterior);
+              //atualiza a anterior e proxima
+              anterior = atual->get_anterior();
+              prox = atual->get_proxima();
+              if (anterior != primeira){
+                  anteriorNota = anterior->get_objeto()->get_nota();
+              }
+          }
+          atual = prox2;
+      }
+  }
+}
+
+void Curso::classificar(Aluno* aluno){
+    
+}
