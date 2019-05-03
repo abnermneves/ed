@@ -19,6 +19,7 @@ public:
     Lista<Aluno*>* get_lista_alunos();
     void classificar();
     void ordenar_alunos();
+    void desempatar(unsigned int* i, unsigned int* j);
 };
 
 #endif

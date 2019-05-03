@@ -66,7 +66,7 @@ void MiniSisu::classificar(){
 
     //pra entrar no for, precisa ter mais de 1 aluno
     //aqui classifica só os alunos que não empataram
-    for (unsigned int i = 1; i < m; i++){
+    for (unsigned int i = 1; i <= m; i++){
         aluno = alunos->get_objeto(i);
         notaAtual = aluno->get_nota();
         proximo = alunos->get_objeto(i+1);
@@ -76,12 +76,10 @@ void MiniSisu::classificar(){
 
         //encontra alunos com a nota igual à do atual
         unsigned int j = i;
-        while (proximo != nullptr && j < m && notaAtual == notaProx){
+        while (proximo != nullptr && j <= m && notaAtual == notaProx){
             aluno = proximo;
             proximo = alunos->get_objeto(j+2);
-            if (proximo){
-                notaProx = proximo->get_nota();
-            }
+            notaProx = proximo->get_nota();
             j++;
         }
 
@@ -91,26 +89,53 @@ void MiniSisu::classificar(){
             //std::cout << "OI CHEGUEI AQUI ALGUEM NAO EMATOU A NOTA" << std::endl;
             cp = cursos->get_objeto(aluno->get_p());
             aprovado = cp->classificar(aluno);
-            cp->get_po()->remover(aluno);
 
             cs = cursos->get_objeto(aluno->get_s());
-            if (aprovado){
-                cs->get_so()->remover(aluno);
-            } else {
+            if (!aprovado){
                 cs->classificar(aluno);
             }
 
             alunos->remover(aluno);
+            i--;
             m--;
         } else {
             //std::cout << "OI CHEGUEI AQUI ALGUEM EMpATOU SIM A NOTA" << std::endl;
             //agora, se houve empate de nota,
             //desempata e continua a partir do proximo
-
+            this->desempatar(&i, &j);
             i = j;
         }
     }
 
+}
+
+void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
+    auto alunos = this->alunos;
+    auto cursos = this->cursos;
+
+    Aluno* atual;
+    Curso* cp;
+    Curso* cs;
+    bool aprovado;
+
+    for (unsigned int k = *i; k <= *j; k++){
+        atual = alunos->get_objeto(k);
+        cp = cursos->get_objeto(atual->get_p());
+        aprovado = cp->classificar(atual);
+
+        if (aprovado){
+            alunos->remover(atual);
+            *j--;
+        }
+    }
+
+    for (unsigned int k = *i; k <= *j; k++){
+        atual = alunos->get_objeto(k);
+        cs = cursos->get_objeto(atual->get_s());
+        aprovado = cs->classificar(atual);
+        alunos->remover(atual);
+    }
+/*
     for (unsigned int i = 1; i <= n ; i++){
         curso = this->cursos->get_objeto(i);
         auto po = curso->get_po();
@@ -144,6 +169,7 @@ void MiniSisu::classificar(){
             aprovado = curso->classificar(aluno);
         }
     }
+    */
 }
 
 Lista<Curso*>* MiniSisu::get_lista_cursos(){
