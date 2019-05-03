@@ -26,7 +26,6 @@ void MiniSisu::ler(){
     }
 
     Lista<Curso*>* cursos = this->get_lista_cursos();
-    cursos->imprimir();
 
     for (unsigned int i = 1; i <= m; i++){
         std::getline(std::cin, nome);
@@ -49,7 +48,6 @@ void MiniSisu::ler(){
 }
 
 void MiniSisu::classificar(){
-    Celula<Curso*>* celula = this->cursos->get_celula(0);
     Curso* curso;
     Aluno* aluno;
     unsigned int n = this->cursos->get_tamanho();
@@ -60,11 +58,29 @@ void MiniSisu::classificar(){
         curso = this->cursos->get_objeto(i);
         auto po = curso->get_po();
         curso->ordenar_alunos(po);
-
-        unsigned int m = po->get_tamanho();
+        m = po->get_tamanho();
 
         for (unsigned int i = 1; i <= m; i++){
             aluno = po->get_objeto(i);
+            aprovado = curso->classificar(aluno);
+
+            //se o aluno foi aprovado na primeira opção
+            //então ele não vai concorrer na segunda
+            if (aprovado){
+                unsigned int s = aluno->get_s();
+                cursos->get_objeto(s)->get_so()->remover(i);
+            }
+        }
+    }
+
+    for (unsigned int i = 1; i <= n ; i++){
+        curso = this->cursos->get_objeto(i);
+        auto so = curso->get_so();
+        curso->ordenar_alunos(so);
+        m = so->get_tamanho();
+
+        for (unsigned int i = 1; i <= m; i++){
+            aluno = so->get_objeto(i);
             aprovado = curso->classificar(aluno);
         }
     }
@@ -80,7 +96,6 @@ Lista<Aluno*>* MiniSisu::get_lista_alunos(){
 
 void MiniSisu::imprimir(){
     this->cursos->imprimir();
-    this->alunos->imprimir();
 }
 
 void MiniSisu::imprimir_entrada(){

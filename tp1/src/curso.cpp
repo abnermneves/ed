@@ -31,8 +31,13 @@ unsigned int Curso::get_id(){
 
 void Curso::imprimir(){
     std::cout << this->nome << " "
-              << std::setprecision(2)
-              << this->nota_corte << std::endl;
+              << std::setprecision(2) << std::fixed
+              << this->nota_corte << std::endl
+              << "Classificados" << std::endl;
+    this->classificados->imprimir();
+    std::cout << "Lista de espera" << std::endl;
+    this->espera->imprimir();
+    std::cout << std::endl;
 }
 
 void Curso::imprimir_entrada(){
