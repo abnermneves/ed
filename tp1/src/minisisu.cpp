@@ -49,10 +49,64 @@ void MiniSisu::ler(){
 
 void MiniSisu::classificar(){
     Curso* curso;
+    Curso* cp;
+    Curso* cs;
     Aluno* aluno;
-    unsigned int n = this->cursos->get_tamanho();
-    unsigned int m;
+    Aluno* proximo;
+    auto alunos = this->alunos;
+    auto cursos = this->cursos;
+    unsigned int n = cursos->get_tamanho();
+    unsigned int m = alunos->get_tamanho();
     bool aprovado;
+    float notaAtual;
+    float notaProx;
+
+    this->ordenar_alunos();
+    //this->imprimir_entrada();
+
+    //pra entrar no for, precisa ter mais de 1 aluno
+    //aqui classifica só os alunos que não empataram
+    for (unsigned int i = 1; i < m; i++){
+        aluno = alunos->get_objeto(i);
+        notaAtual = aluno->get_nota();
+        proximo = alunos->get_objeto(i+1);
+        if (proximo){
+            notaProx = proximo->get_nota();
+        }
+
+        //encontra alunos com a nota igual
+        unsigned int j = i;
+        while (proximo != nullptr && j < m && notaAtual == notaProx){
+            aluno = proximo;
+            proximo = alunos->get_objeto(j+2);
+            if (proximo){
+                notaProx = proximo->get_nota();
+            }
+            j++;
+        }
+
+        if (i == j){
+            std::cout << "OI CHEGUEI AQUI ALGUEM NAO EMATOU A NOTA" << std::endl;
+            cp = cursos->get_objeto(aluno->get_p());
+            aprovado = cp->classificar(aluno);
+
+            cs = cursos->get_objeto(aluno->get_s());
+            if (aprovado){
+                cs->get_so()->remover(aluno);
+            } else {
+                cs->classificar(aluno);
+            }
+
+            alunos->remover(aluno);
+            m--;
+        } else {
+            std::cout << "OI CHEGUEI AQUI ALGUEM EMpATOU SIM A NOTA" << std::endl;
+            //agora, se houve empate de nota,
+            //desempata e continua a partir do proximo
+
+            i = j;
+        }
+    }
 
     for (unsigned int i = 1; i <= n ; i++){
         curso = this->cursos->get_objeto(i);
@@ -104,4 +158,9 @@ void MiniSisu::imprimir(){
 void MiniSisu::imprimir_entrada(){
     this->cursos->imprimir_entrada();
     this->alunos->imprimir_entrada();
+}
+
+void MiniSisu::ordenar_alunos(){
+    Curso* aux = new Curso(1, "Auxiliar pra ordenação pq fui burro", 0);
+    aux->ordenar_alunos(this->alunos);
 }

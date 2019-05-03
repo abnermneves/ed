@@ -26,6 +26,7 @@ public:
     Celula<T>* get_celula(unsigned int posicao);
     void imprimir_entrada();
     void remover(unsigned int posicao);
+    void remover(T objeto);
 };
 
 #endif

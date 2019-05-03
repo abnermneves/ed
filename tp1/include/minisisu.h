@@ -18,6 +18,7 @@ public:
     Lista<Curso*>* get_lista_cursos();
     Lista<Aluno*>* get_lista_alunos();
     void classificar();
+    void ordenar_alunos();
 };
 
 #endif

@@ -63,6 +63,9 @@ unsigned int Lista<T>::get_tamanho(){
 
 template <typename T>
 Celula<T>* Lista<T>::get_celula(unsigned int posicao){
+    if (posicao < 0 || posicao > this->tamanho){
+        return nullptr;
+    }
     Celula<T>* atual = this->primeira;
     while (atual->get_posicao() != posicao){
         atual = atual->get_proxima();
@@ -72,6 +75,9 @@ Celula<T>* Lista<T>::get_celula(unsigned int posicao){
 
 template <typename T>
 T Lista<T>::get_objeto(unsigned int posicao){
+    if (posicao < 0 || posicao > this->tamanho){
+        return nullptr;
+    }
     return this->get_celula(posicao)->get_objeto();
 }
 
@@ -83,6 +89,36 @@ void Lista<T>::remover(unsigned int posicao){
     Celula<T>* celula = this->get_celula(posicao);
     Celula<T>* anterior = celula->get_anterior();
     Celula<T>* posterior = celula->get_proxima();
+
+    anterior->set_proxima(posterior);
+    if (posterior != nullptr){
+      posterior->set_anterior(anterior);
+    }
+    this->tamanho--;
+
+    //atualizar posições
+    while (posterior != nullptr){
+        posterior->set_posicao(posterior->get_posicao() - 1);
+        posterior = posterior->get_proxima();
+    }
+}
+
+template <typename T>
+void Lista<T>::remover(T objeto){
+    if (objeto == nullptr){
+        return;
+    }
+    Celula<T>* celula = this->get_celula(0);
+    Celula<T>* anterior = celula->get_anterior();
+    Celula<T>* posterior = celula->get_proxima();
+
+    while (celula != nullptr && celula->get_objeto() != objeto){
+        anterior = celula;
+        celula = posterior;
+        if (posterior){
+            posterior = posterior->get_proxima();
+        }
+    }
 
     anterior->set_proxima(posterior);
     if (posterior != nullptr){

@@ -58,3 +58,31 @@ TEST_CASE("Testando inserção"){
     delete a2;
     delete a3;
 }
+
+TEST_CASE("Testando remover objeto"){
+    Lista<Aluno*>* l = new Lista<Aluno*>();
+    Aluno* a1 = new Aluno(0, "Samantha!", 700.51, 3, 2);
+    Aluno* a2 = new Aluno(1, "Percoço", 680.04, 1, 4);
+    Aluno* a3 = new Aluno(2, "Zé Pikeno", 790.67, 3, 2);
+    Aluno* a4 = new Aluno(3, "Little My", 850.32, 1, 2);
+    Aluno* a5 = new Aluno(4, "Moomin Mama", 687.34, 1, 2);
+    l->inserir(a1);
+    l->inserir(a2);
+    l->inserir(a3);
+    l->inserir(a4);
+    l->inserir(a5);
+
+    l->remover(a3);
+    CHECK_EQ(l->get_objeto(1), a1);
+    CHECK_EQ(l->get_objeto(2), a2);
+    CHECK_EQ(l->get_objeto(3), a4);
+    CHECK_EQ(l->get_objeto(4), a5);
+    CHECK_EQ(l->get_tamanho(), 4);
+    
+    Lista<Aluno*>* l2 = new Lista<Aluno*>();
+    Aluno* a = new Aluno(0, "Samantha!", 700.51, 3, 2);
+    l2->inserir(a);
+    l2->remover(a);
+    CHECK_EQ(l2->get_tamanho(), 0);
+    
+}
