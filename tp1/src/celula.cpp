@@ -23,7 +23,9 @@ Celula<T>::Celula(T objeto){
 
 template <typename T>
 Celula<T>::~Celula(){
-
+  if (this->objeto){
+    delete this->objeto;
+  }
 }
 
 template <typename T>

@@ -8,6 +8,11 @@ MiniSisu::MiniSisu(){
     this->alunos = new Lista<Aluno*>();
 }
 
+MiniSisu::~MiniSisu(){
+    this->cursos->~Lista();
+    this->alunos->~Lista();
+}
+
 void MiniSisu::ler(){
     unsigned int n, m, vagas, p, s;
     float nota;
@@ -40,10 +45,10 @@ void MiniSisu::ler(){
         this->alunos->inserir(aluno);
 
         //insere o aluno na lista de po e so dos cursos escolhidos
-        curso = cursos->get_objeto(p);
+        /*curso = cursos->get_objeto(p);
         curso->get_po()->inserir(aluno);
         curso = cursos->get_objeto(s);
-        curso->get_so()->inserir(aluno);
+        curso->get_so()->inserir(aluno);*/
     }
 }
 
@@ -67,7 +72,7 @@ void MiniSisu::classificar(){
     //pra entrar no for, precisa ter mais de 1 aluno
     //aqui classifica só os alunos que não empataram
     for (unsigned int i = 1; i <= m; i++){
-        std::cout << "i: " << i << std::endl;
+        //std::cout << "i: " << i << std::endl;
         aluno = alunos->get_objeto(i);
         notaAtual = aluno->get_nota();
         proximo = alunos->get_objeto(i+1);
@@ -78,10 +83,10 @@ void MiniSisu::classificar(){
         //encontra alunos com a nota igual à do atual
         unsigned int j = i;
         while (proximo != nullptr && j < m && notaAtual == notaProx){
-            std::cout << "j: " << j << std::endl;
+            //std::cout << "j: " << j << std::endl;
             aluno = proximo;
             proximo = alunos->get_objeto(j+2);
-            if (proximo){
+            if (proximo != nullptr){
                 notaProx = proximo->get_nota();
             }
             j++;
@@ -94,22 +99,22 @@ void MiniSisu::classificar(){
             cp = cursos->get_objeto(aluno->get_p());
             aprovado = cp->classificar(aluno);
 
-            cs = cursos->get_objeto(aluno->get_s());
+            
             if (!aprovado){
-                cs->classificar(aluno);
+                cs = cursos->get_objeto(aluno->get_s());
+                aprovado = cs->classificar(aluno);
             }
 
             alunos->remover(aluno);
             i--;
-            m--;
         } else {
             //std::cout << "OI CHEGUEI AQUI ALGUEM EMpATOU SIM A NOTA" << std::endl;
             //agora, se houve empate de nota,
             //desempata e continua a partir do proximo
             this->desempatar(&i, &j);
-            m = alunos->get_tamanho();
             //i = j;
         }
+        m = alunos->get_tamanho();
     }
 
 }

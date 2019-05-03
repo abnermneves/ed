@@ -12,6 +12,7 @@ private:
 
 public:
     MiniSisu();
+    ~MiniSisu();
     void ler();
     void imprimir();
     void imprimir_entrada();
