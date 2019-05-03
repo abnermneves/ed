@@ -89,6 +89,15 @@ void Curso::ordenar_alunos(Lista<Aluno*>* lista){
   }
 }
 
-void Curso::classificar(Aluno* aluno){
-    
+bool Curso::classificar(Aluno* aluno){
+    if (this->classificados->get_tamanho() < this->vagas){
+        this->classificados->inserir(aluno);
+        if (this->classificados->get_tamanho() == this->vagas){
+            this->nota_corte = aluno->get_nota();
+        }
+        return true;
+    } else {
+        this->espera->inserir(aluno);
+        return false;
+    }
 }
