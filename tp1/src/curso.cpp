@@ -48,9 +48,9 @@ void Curso::ordenar_alunos(Lista<Aluno*>* lista){
   Celula<Aluno*>* primeira = lista->get_celula(0);
   //então atual começa na segunda célula
   Celula<Aluno*>* atual = primeira->get_proxima();
-  Celula<Aluno*>* anterior;
-  Celula<Aluno*>* prox;
-  Celula<Aluno*>* prox2;
+  Celula<Aluno*>* anterior = nullptr;
+  Celula<Aluno*>* prox = nullptr;
+  Celula<Aluno*>* prox2 = nullptr;
   //tamanho é 0 se tiver só a célula cabeça
   unsigned int tamanho = lista->get_tamanho();
 

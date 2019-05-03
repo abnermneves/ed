@@ -6,7 +6,7 @@
 int main () {
     MiniSisu* sisu = new MiniSisu();
     sisu->ler();
-    //sisu->imprimir_entrada();
+    sisu->imprimir_entrada();
     sisu->classificar();
     sisu->imprimir();
 
