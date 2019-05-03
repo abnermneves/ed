@@ -46,7 +46,8 @@ void Aluno::imprimir(){
 }
 
 void Aluno::imprimir_entrada(){
-    std::cout << this->nome << " "
+    std::cout << this->id << " "
+              << this->nome << " "
               << std::setprecision(2) << std::fixed
               << this->nota << " "
               << p << " " << s << std::endl;

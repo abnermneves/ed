@@ -40,7 +40,10 @@ void Curso::imprimir(){
 }
 
 void Curso::imprimir_entrada(){
-    std::cout << this->nome << " " << this->vagas << std::endl;
+    std::cout << this->id << " "
+              << this->nome << " "
+              << this->vagas << " "
+              << this->nota_corte << std::endl;
 }
 
 void Curso::ordenar_alunos(Lista<Aluno*>* lista){

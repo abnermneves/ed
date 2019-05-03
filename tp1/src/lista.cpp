@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "lista.h"
 
 template class Lista<Curso*>;
@@ -91,7 +92,7 @@ T Lista<T>::get_objeto(unsigned int posicao){
 template <typename T>
 void Lista<T>::remover(unsigned int posicao){
     if (posicao <= 0 || posicao > this->get_tamanho()){
-        return;
+        throw std::out_of_range("Tentativa de remoção em posição inválida!");
     }
     Celula<T>* celula = this->get_celula(posicao);
     Celula<T>* anterior = celula->get_anterior();
@@ -113,7 +114,7 @@ void Lista<T>::remover(unsigned int posicao){
 template <typename T>
 void Lista<T>::remover(T objeto){
     if (objeto == nullptr){
-        return;
+        throw std::invalid_argument("Tentativa de remoção de objeto vazio!");
     }
     Celula<T>* celula = this->get_celula(0);
     Celula<T>* anterior = celula->get_anterior();
