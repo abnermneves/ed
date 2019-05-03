@@ -74,7 +74,7 @@ void MiniSisu::classificar(){
             notaProx = proximo->get_nota();
         }
 
-        //encontra alunos com a nota igual
+        //encontra alunos com a nota igual à do atual
         unsigned int j = i;
         while (proximo != nullptr && j < m && notaAtual == notaProx){
             aluno = proximo;
@@ -85,10 +85,13 @@ void MiniSisu::classificar(){
             j++;
         }
 
+        //se não tem empate
+        //então classifica o aluno atual
         if (i == j){
-            std::cout << "OI CHEGUEI AQUI ALGUEM NAO EMATOU A NOTA" << std::endl;
+            //std::cout << "OI CHEGUEI AQUI ALGUEM NAO EMATOU A NOTA" << std::endl;
             cp = cursos->get_objeto(aluno->get_p());
             aprovado = cp->classificar(aluno);
+            cp->get_po()->remover(aluno);
 
             cs = cursos->get_objeto(aluno->get_s());
             if (aprovado){
@@ -100,7 +103,7 @@ void MiniSisu::classificar(){
             alunos->remover(aluno);
             m--;
         } else {
-            std::cout << "OI CHEGUEI AQUI ALGUEM EMpATOU SIM A NOTA" << std::endl;
+            //std::cout << "OI CHEGUEI AQUI ALGUEM EMpATOU SIM A NOTA" << std::endl;
             //agora, se houve empate de nota,
             //desempata e continua a partir do proximo
 
