@@ -20,6 +20,8 @@ void MiniSisu::ler(){
 
     std::cin >> n >> m;
     std::cin.ignore();
+
+    //lê os cursos e insere na lista
     for (unsigned int i = 1; i <= n; i++){
         std::string nome;
         std::getline(std::cin, nome);
@@ -30,6 +32,7 @@ void MiniSisu::ler(){
         this->cursos->inserir(curso);
     }
 
+    //lê os alunos e insere na lista
     for (unsigned int i = 1; i <= m; i++){
         std::string nome;
         std::getline(std::cin, nome);
@@ -61,10 +64,10 @@ void MiniSisu::classificar(){
     float notaProx = 0;
 
     this->ordenar_alunos();
-    //this->imprimir_entrada();
 
     //pra entrar no for, precisa ter mais de 1 aluno
-    //aqui classifica só os alunos que não empataram
+    //aqui classifica os alunos que não empataram
+    //e se teve empate, chama o método de desempate
     for (unsigned int i = 1; i <= m; i++){
         aluno = alunos->get_objeto(i);
         notaAtual = aluno->get_nota();
@@ -74,9 +77,10 @@ void MiniSisu::classificar(){
         }
 
         //encontra alunos com a nota igual à do atual
+        //e salva as posições do primeiro e do último
+        //para passá-las ao método de desempate
         unsigned int j = i;
         while (proximo != nullptr && j < m && notaAtual == notaProx){
-            
             aluno = proximo;
             proximo = alunos->get_objeto(j+2);
             if (proximo != nullptr){
@@ -90,12 +94,10 @@ void MiniSisu::classificar(){
         if (i == j){
             cp = cursos->get_objeto(aluno->get_p());
             aprovado = cp->classificar(aluno);
-            
             if (!aprovado){
                 cs = cursos->get_objeto(aluno->get_s());
                 aprovado = cs->classificar(aluno);
             }
-
             alunos->remover(aluno);
             i--;
             j--;
@@ -116,8 +118,9 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
     Aluno* atual = nullptr;
     Curso* cp = nullptr;
     Curso* cs = nullptr;
-    bool aprovado;
+    bool aprovado = 0;
 
+    //classifica sequencialmente todos os alunos em suas primeiras opções
     for (unsigned int k = *i; k <= *j; k++){
         atual = alunos->get_objeto(k);
         if (atual){
@@ -126,20 +129,19 @@ void MiniSisu::desempatar(unsigned int* i, unsigned int* j){
 
             if (aprovado){
                 alunos->remover(atual);
-                //*i--;
                 *j--;
                 k--;
             }
         }
     }
 
+    //classifica os que sobraram nas suas segundas opções
     for (unsigned int k = *i; k <= *j; k++){
         atual = alunos->get_objeto(k);
         if (atual){
             cs = cursos->get_objeto(atual->get_s());
             aprovado = cs->classificar(atual);
             alunos->remover(atual);
-            //*i--;
             *j--;
             k--;
         }
@@ -190,6 +192,7 @@ void MiniSisu::ordenar_alunos(){
           atualNota = atual->get_objeto()->get_nota();
           anteriorNota = anterior->get_objeto()->get_nota();
 
+          //enquanto a nota é maior, traz o aluno pra frente
           while (anterior != primeira && atualNota > anteriorNota){
               //troca a celula atual com a anterior
               atual->trocar(anterior);
