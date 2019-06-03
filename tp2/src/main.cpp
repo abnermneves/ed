@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
-#include "teste.cpp"
+#include "gerador.cpp"
+
 using namespace std;
 
 int main(int argc, char* argv[]){
-  teste(argc, argv);
   string varQS = argv[1];
   string tipoVetor = argv[2];
   unsigned int tam = stoi(argv[3]);
+  int vetor[tam] = {};
   bool exibir = false;
   
   if (argc == 5){
@@ -15,18 +16,17 @@ int main(int argc, char* argv[]){
     if(p == "-p")
       exibir = true;
   }
-  
-  int vetor[tam];
-  
+    
   if(tipoVetor == "Ale"){
-  
+    gerarAleatorio(vetor, tam);
   } else if (tipoVetor == "OrdC"){
-  
+    gerarOrdenadoCrescente(vetor, tam);
   } else if (tipoVetor == "OrdD"){
-  
+    gerarOrdenadoDecrescente(vetor, tam);
   } else {
     cout << "Tipo de vetor inválido!" << endl;
   }
+  imprimir(vetor, tam);
   
   if(varQS == "QC"){
       cout << "QC" << endl;
