@@ -9,19 +9,14 @@ void gerarAleatorio(int* vetor, unsigned int tam){
 }
 
 void gerarOrdenadoCrescente(int* vetor, unsigned int tam){
-  int max = RAND_MAX - tam;
-  srand(time(NULL));
-  int ale = rand() % max;
   for(unsigned int i = 0; i < tam; i++){
-    vetor[i] = ale+i;
+    vetor[i] = i+1;
   }
 }
 
 void gerarOrdenadoDecrescente(int* vetor, unsigned int tam){
-  srand(time(NULL));
-  int ale = rand();
   for(unsigned int i = 0; i < tam; i++){
-    vetor[i] = ale-i;
+    vetor[i] = tam-i;
   }
 }
 
