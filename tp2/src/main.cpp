@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "gerador.cpp"
+#include "qc.cpp"
 
 using namespace std;
 

@@ -8,6 +8,13 @@ void gerarAleatorio(int* vetor, unsigned int tam){
   }
 }
 
+void gerarAleatorioEntre(int* vetor, unsigned int tam, int a, int b){
+  srand(time(NULL));
+  for(unsigned int i = 0; i < tam; i++){
+    vetor[i] = (rand() % b) + a;
+  }
+}
+
 void gerarOrdenadoCrescente(int* vetor, unsigned int tam){
   for(unsigned int i = 0; i < tam; i++){
     vetor[i] = i+1;
@@ -24,5 +31,5 @@ void imprimir(int* vetor, unsigned int tam){
   for (unsigned int i = 0; i < tam; i++){
     std::cout << vetor[i] << " ";
   }
-  std::cout << std::endl;
+  std::cout << std::endl << std::endl;
 }
