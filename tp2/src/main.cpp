@@ -30,7 +30,8 @@ int main(int argc, char* argv[]){
   imprimir(vetor, tam);
 
   if(varQS == "QC"){
-      cout << "QC" << endl;
+      QC(vetor, tam);
+      imprimir(vetor, tam);
   } else if(varQS == "QM3"){
       cout << "QM3" << endl;
   } else if(varQS == "QPE"){

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "geradores.h"
 
 void gerarAleatorio(int* vetor, unsigned int tam){
   srand(time(NULL));

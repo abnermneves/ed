@@ -1,5 +1,4 @@
 #include "quicksorts.h"
-#include "geradores.h"
 
 void Particiona(int* vetor, unsigned int esq, unsigned int dir,
                 unsigned int* i, unsigned int* j){

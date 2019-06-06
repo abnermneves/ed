@@ -22,7 +22,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 
 main: $(OBJECTS)
 	@mkdir -p $(BINDIR)
-	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o $(BINDIR)/main
+	$(CC) $(CFLAGS) $(INC) $^ -o main
 
 tests: $(OBJECTS)
 	@mkdir -p $(BINDIR)
@@ -40,6 +40,6 @@ coverage:
 	@$(RM) *.gcda *.gcno
 
 clean:
-	$(RM) -r $(OBJDIR)/* $(BINDIR)/* coverage/* *.gcda *.gcno *.gcov
+	$(RM) -r $(OBJDIR) $(BINDIR) coverage/* *.gcda *.gcno *.gcov main
 
 .PHONY: clean coverage
