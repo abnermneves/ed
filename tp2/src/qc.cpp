@@ -1,10 +1,13 @@
+#include "quicksorts.h"
+#include "geradores.h"
+
 void Particiona(int* vetor, unsigned int esq, unsigned int dir,
                 unsigned int* i, unsigned int* j){
   int aux;
   *i = esq;
   *j = dir;
   int pivo = vetor[(*i+*j)/2];
-  
+
   do{
     while (vetor[*i] < pivo)
       (*i)++;

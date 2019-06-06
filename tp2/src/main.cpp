@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
-#include "gerador.cpp"
-#include "qc.cpp"
+#include "quicksorts.h"
+#include "geradores.h"
 
 using namespace std;
 
@@ -11,13 +11,13 @@ int main(int argc, char* argv[]){
   unsigned int tam = stoi(argv[3]);
   int vetor[tam] = {};
   bool exibir = false;
-  
+
   if (argc == 5){
     string p = argv[4];
     if(p == "-p")
       exibir = true;
   }
-    
+
   if(tipoVetor == "Ale"){
     gerarAleatorio(vetor, tam);
   } else if (tipoVetor == "OrdC"){
@@ -28,7 +28,7 @@ int main(int argc, char* argv[]){
     cout << "Tipo de vetor inválido!" << endl;
   }
   imprimir(vetor, tam);
-  
+
   if(varQS == "QC"){
       cout << "QC" << endl;
   } else if(varQS == "QM3"){
@@ -36,16 +36,16 @@ int main(int argc, char* argv[]){
   } else if(varQS == "QPE"){
       cout << "QPE" << endl;
   } else if(varQS == "QI1"){
-    
+
   } else if(varQS == "QI5"){
-    
+
   } else if(varQS == "QI10"){
-    
+
   } else if(varQS == "QNR"){
-  
+
   } else{
-      cout << "QuickSort inválido!" << endl;  
+      cout << "QuickSort inválido!" << endl;
   }
-  
+
   return 0;
 }
