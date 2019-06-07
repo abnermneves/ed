@@ -28,11 +28,12 @@ int main(int argc, char* argv[]){
   } else {
     cout << "Tipo de vetor inválido!" << endl;
   }
-  imprimir(vetor, tam);
-
+  //imprimir(vetor, tam);
+  //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   if(varQS == "QC"){
       QC(vetor, tam);
-      imprimir(vetor, tam);
+      //imprimir(vetor, tam);
+      //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   } else if(varQS == "QM3"){
       cout << "QM3" << endl;
   } else if(varQS == "QPE"){

@@ -35,3 +35,12 @@ void imprimir(int* vetor, unsigned int tam){
   }
   std::cout << std::endl << std::endl;
 }
+
+bool estaOrdenado(int* vetor, unsigned int tam){
+  bool ordenado = true;
+  for (unsigned int i = 0; i < tam-1; i++){
+    if(vetor[i] > vetor[i+1])
+      ordenado = false;
+  }
+  return ordenado;
+}
