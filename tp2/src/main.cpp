@@ -28,8 +28,8 @@ int main(int argc, char* argv[]){
   } else {
     cout << "Tipo de vetor inválido!" << endl;
   }
-  //imprimir(vetor, tam);
-  //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
+  imprimir(vetor, tam);
+  std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   if(varQS == "QC"){
       QC(vetor, tam);
       //imprimir(vetor, tam);
@@ -46,6 +46,10 @@ int main(int argc, char* argv[]){
 
   } else if(varQS == "QNR"){
 
+  } else if(varQS == "IS"){
+    InsertionSort(vetor, 0, tam-1);
+    imprimir(vetor, tam);
+    std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   } else{
       cout << "QuickSort inválido!" << endl;
   }
