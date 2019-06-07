@@ -1,11 +1,15 @@
 #include "quicksorts.h"
+#include "geradores.h"
+#include <iostream>
 
 void Particiona(int* vetor, unsigned int esq, unsigned int dir,
                 unsigned int* i, unsigned int* j){
-  int aux;
+  int aux, pivo;
   *i = esq;
   *j = dir;
-  int pivo = vetor[(*i+*j)/2];
+  unsigned int indpivo = (*i+*j)/2;
+  //std::cout << "pivo: " << indpivo << std::endl;
+  pivo = vetor[indpivo];
 
   do{
     while (vetor[*i] < pivo)
@@ -25,12 +29,17 @@ void Particiona(int* vetor, unsigned int esq, unsigned int dir,
 void Ordena(int* vetor, unsigned int esq, unsigned int dir){
   unsigned int i, j;
   Particiona(vetor, esq, dir, &i, &j);
+imprimir(vetor, dir);
   if (j > esq)
     Ordena(vetor, esq, j);
+  imprimir(vetor, dir);
   if (i < dir)
     Ordena(vetor, i, dir);
+  imprimir(vetor, dir);
 }
 
 void QC(int* vetor, unsigned int tam){
   Ordena(vetor, 0, tam-1);
 }
+
+//acho que na linha 15 é só <

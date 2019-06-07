@@ -10,6 +10,7 @@ int main(int argc, char* argv[]){
   string tipoVetor = argv[2];
   unsigned int tam = stoi(argv[3]);
   int vetor[tam] = {};
+  //int vetor[tam] = {1, 3, 4, 5, 2};
   bool exibir = false;
 
   if (argc == 5){
