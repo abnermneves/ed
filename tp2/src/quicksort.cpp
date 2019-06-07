@@ -1,4 +1,4 @@
-#include "quicksorts.h"
+#include "ordenadores.h"
 #include "geradores.h"
 #include <iostream>
 #include <string>
@@ -66,4 +66,53 @@ void Ordena(int* vetor, int esq, int dir, std::string varQS){
 
 void QuickSort(int* vetor, unsigned int tam, std::string varQS){
   Ordena(vetor, 0, tam-1, varQS);
+}
+
+//---------------------QUICKSORT COM INSERTION----------------------//
+
+void OrdenaQuickInsertion(int* vetor, int esq, int dir,
+                          unsigned int tam, std::string varQS){
+  int i, j;
+  float k;
+  if (varQS == "QI1"){
+    k = 0.01;
+  } else if(varQS == "QI5"){
+    k = 0.05;
+  } else{
+    k = 0.1;
+  }
+
+  //particiona selecionando o pivô pela mediana de 3
+  Particiona(vetor, esq, dir, &i, &j, "QM3");
+
+  if (j > esq){
+    //porcentagem representada pelo tamanho do subvetor [esq, j]
+    //em relação ao vetor inteiro de tamanho tam
+    float porcento = (float)(j-esq)/(float)tam;
+    std::cout << "porcento: " << porcento << std::endl;
+    //se a porcentagem for menor que k, ordena com insertion
+    if (porcento < k){
+      std::cout << "Insertion com " << porcento << "%" << std::endl;
+      InsertionSort(vetor, esq, j);
+    }
+    else
+      OrdenaQuickInsertion(vetor, esq, j, tam, varQS);
+  }
+  if (i < dir){
+    //porcentagem representada pelo tamanho do subvetor [i, dir]
+    //em relação ao vetor inteiro de tamanho tam
+    float porcento = (float)(dir-i)/(float)tam;
+    std::cout << "porcento: " << porcento << std::endl;
+    //se a porcentagem for menor que k, ordena com insertion
+    if (porcento < k){
+      std::cout << "Insertion com " << porcento << "%" << std::endl;
+      InsertionSort(vetor, i, dir);
+    }
+    else
+      OrdenaQuickInsertion(vetor, i, dir, tam, varQS);
+  }
+}
+
+void QuickComInsertion(int* vetor, unsigned int tam, std::string varQS){
+  OrdenaQuickInsertion(vetor, 0, tam-1, tam, varQS);
 }

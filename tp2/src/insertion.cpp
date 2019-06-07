@@ -1,4 +1,4 @@
-#include "quicksorts.h"
+#include "ordenadores.h"
 
 void InsertionSort(int* vetor, int esq, int dir){
   int i, j, aux;

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "quicksorts.h"
+#include "ordenadores.h"
 #include "geradores.h"
 
 using namespace std;
@@ -34,12 +34,10 @@ int main(int argc, char* argv[]){
       QuickSort(vetor, tam, varQS);
       imprimir(vetor, tam);
       std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
-  } else if(varQS == "QI1"){
-
-  } else if(varQS == "QI5"){
-
-  } else if(varQS == "QI10"){
-
+  } else if(varQS == "QI1" || varQS == "QI5" || varQS == "QI10"){
+      QuickComInsertion(vetor, tam, varQS);
+      imprimir(vetor, tam);
+      std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   } else if(varQS == "QNR"){
 
   } else if(varQS == "IS"){

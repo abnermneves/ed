@@ -21,7 +21,6 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 main: $(OBJECTS)
-	@mkdir -p $(BINDIR)
 	$(CC) $(CFLAGS) $(INC) $^ -o main
 
 tests: $(OBJECTS)
