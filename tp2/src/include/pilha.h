@@ -10,6 +10,7 @@ private:
 
 public:
   Pilha();
+  ~Pilha();
   bool vazia();
   void empilha(Celula* celula);
   void empilha(int esq, int dir);

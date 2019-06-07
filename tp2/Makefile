@@ -5,7 +5,7 @@ OBJDIR := build
 BINDIR := bin
 
 MAIN := src/main.cpp
-TESTER := src/teste.cpp
+TESTER := src/tester.cpp
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -23,9 +23,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 main: $(OBJECTS)
 	$(CC) $(CFLAGS) $(INC) $^ -o main
 
-teste: $(OBJECTS)
-	$(CC) $(CFLAGS) $(INC) $(TESTER) $(TSTSOURCES) $^ -o $(BINDIR)teste
-	tester
+tests: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(TESTER) $(TSTSOURCES) $^ -o $(BINDIR)/tester
+	$(BINDIR)/tester
 
 all: main
 

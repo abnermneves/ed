@@ -2,6 +2,7 @@
 #include <string>
 #include "ordenadores.h"
 #include "geradores.h"
+#include "pilha.h"
 
 using namespace std;
 
