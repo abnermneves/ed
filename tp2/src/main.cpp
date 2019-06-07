@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
   string tipoVetor = argv[2];
   unsigned int tam = stoi(argv[3]);
   int vetor[tam] = {};
-  //int vetor[tam] = {1, 3, 4, 5, 2};
+  //int vetor[tam] = {1, 3, 8, 5, 7, 4};
   bool exibir = false;
 
   if (argc == 5){
@@ -29,15 +29,11 @@ int main(int argc, char* argv[]){
     cout << "Tipo de vetor inválido!" << endl;
   }
   imprimir(vetor, tam);
-  std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
-  if(varQS == "QC"){
-      QC(vetor, tam);
-      //imprimir(vetor, tam);
-      //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
-  } else if(varQS == "QM3"){
-      cout << "QM3" << endl;
-  } else if(varQS == "QPE"){
-      cout << "QPE" << endl;
+  //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
+  if(varQS == "QC" || varQS == "QM3" || varQS == "QPE"){
+      QuickSort(vetor, tam, varQS);
+      imprimir(vetor, tam);
+      std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   } else if(varQS == "QI1"){
 
   } else if(varQS == "QI5"){
