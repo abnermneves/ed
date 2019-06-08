@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+//escolhe o pivô de acordo com
+//a variação do quicksort escolhida
 int escolhePivo(int* vetor, int esq, int dir, std::string varQS){
   if(varQS == "QM3"){
     //coloca os três candidatos a pivô num vetor
@@ -10,9 +12,9 @@ int escolhePivo(int* vetor, int esq, int dir, std::string varQS){
                     vetor[(esq+dir)/2],
                     vetor[dir]};
 
-    //se houver apenas dois candidatos a pivô,
+    //em partições com dois elementos,
     //serão feitas duas cópias do primeiro,
-    //logo, ele será o escolhido
+    //logo, ele sempre será o escolhido para pivô
 
     //ordena o vetor de pivôs
     InsertionSort(pivos, 0, 2);
@@ -45,6 +47,8 @@ void Particiona(int* vetor, int esq, int dir,
     while (vetor[*j] > pivo)
       (*j)--;
 
+    //troca os dois de lugares se i e j
+    //ainda não tiverem passado pela partição inteira
     if (*i <= *j){
       aux = vetor[*i];
       vetor[*i] = vetor[*j];
@@ -53,11 +57,16 @@ void Particiona(int* vetor, int esq, int dir,
       (*j)--;
     }
   } while (*i <= *j);
+  //repete enquanto i e j ainda não tiverem
+  //passado pela partição inteira
 }
 
 void Ordena(int* vetor, int esq, int dir, std::string varQS){
   int i, j;
   Particiona(vetor, esq, dir, &i, &j, varQS);
+
+  //ordena novamente as partições resultantes
+  //se elas ainda tiverem elementos
   if (j > esq)
     Ordena(vetor, esq, j, varQS);
   if (i < dir)
@@ -94,9 +103,9 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
     if (porcento < k){
       std::cout << "Insertion com " << porcento << "%" << std::endl;
       InsertionSort(vetor, esq, j);
+    } else{
+        OrdenaQuickInsertion(vetor, esq, j, tam, varQS);
     }
-    else
-      OrdenaQuickInsertion(vetor, esq, j, tam, varQS);
   }
   if (i < dir){
     //porcentagem representada pelo tamanho do subvetor [i, dir]
@@ -107,12 +116,17 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
     if (porcento < k){
       std::cout << "Insertion com " << porcento << "%" << std::endl;
       InsertionSort(vetor, i, dir);
+    } else{
+        OrdenaQuickInsertion(vetor, i, dir, tam, varQS);
     }
-    else
-      OrdenaQuickInsertion(vetor, i, dir, tam, varQS);
   }
 }
 
 void QuickComInsertion(int* vetor, unsigned int tam, std::string varQS){
   OrdenaQuickInsertion(vetor, 0, tam-1, tam, varQS);
+}
+
+//--------------------QUICKSORT NÃO RECURSIVO-------------------//
+void QuickNaoRecursivo(int* vetor, unsigned int tam){
+  
 }
