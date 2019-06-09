@@ -25,74 +25,73 @@ int main(int argc, char* argv[]){
   int vetores[a][b] = {};
 
   bool exibir = false;
-
   if (argc == 5){
     std::string p = argv[4];
     if(p == "-p")
       exibir = true;
   }
 
-  //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
-
   if(varQS == "QC" || varQS == "QM3" || varQS == "QPE"){
-
     for (unsigned int i = 0; i < N_TESTES; i++){
-      gerarVetor(vetores[i], tam, tipoVetor);
+      gerarVetor(vetores[i], tam, tipoVetor, i);
       copia(vetor, vetores[i], tam);
+
+      //marca o horário antes e depois de ordenar
       start = std::chrono::high_resolution_clock::now();
       QuickSort(vetor, tam, varQS, &(n_comp[i]), &(n_mov[i]));
       end = std::chrono::high_resolution_clock::now();
+
+      //calcula a diferença do tempo de fim e início
       std::chrono::duration<double, std::micro> elapsed_time
       = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
       tempo[i] = elapsed_time.count();
-      //imprimir(vetor, tam);
-      //std::cout << "Ordenado: " << estaOrdenado(vetores[i], tam) << std::endl;
+
     }
 
   } else if(varQS == "QI1" || varQS == "QI5" || varQS == "QI10"){
-
       for (unsigned int i = 0; i < N_TESTES; i++){
-        gerarVetor(vetores[i], tam, tipoVetor);
+        gerarVetor(vetores[i], tam, tipoVetor, i);
         copia(vetor, vetores[i], tam);
+
+        //marca o horário antes e depois de ordenar
         start = std::chrono::high_resolution_clock::now();
         QuickComInsertion(vetor, tam, varQS, &(n_comp[i]), &(n_mov[i]));
         end = std::chrono::high_resolution_clock::now();
+
+        //calcula a diferença do tempo de fim e início
         std::chrono::duration<double, std::micro> elapsed_time
         = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
         tempo[i] = elapsed_time.count();
-        //std::cout << "Ordenado: " << estaOrdenado(vetores[i], tam) << std::endl;
+
       }
 
-
   } else if(varQS == "QNR"){
-
       for (unsigned int i = 0; i < N_TESTES; i++){
-        gerarVetor(vetores[i], tam, tipoVetor);
+        gerarVetor(vetores[i], tam, tipoVetor, i);
         copia(vetor, vetores[i], tam);
+
+        //marca o horário antes e depois de ordenar
         start = std::chrono::high_resolution_clock::now();
         QuickNaoRecursivo(vetor, tam, &(n_comp[i]), &(n_mov[i]));
         end = std::chrono::high_resolution_clock::now();
+
+        //calcula a diferença do tempo de fim e início
         std::chrono::duration<double, std::micro> elapsed_time
         = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
         tempo[i] = elapsed_time.count();
-        //std::cout << "Ordenado: " << estaOrdenado(vetores[i], tam) << std::endl;
+
       }
 
-  } else if(varQS == "IS"){
-
-      gerarVetor(vetor, tam, tipoVetor);
-      InsertionSort(vetor, 0, tam-1);
-      //std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
-
   } else{
-
       std::cout << "QuickSort inválido!" << std::endl;
-
   }
 
+  //calcula as médias e mediana de
+  //comparações, movimentações e tempo de execução
   int media_comp = media(n_comp, N_TESTES);
   int media_mov = media(n_mov, N_TESTES);
   int mediana_tempo = mediana(tempo, N_TESTES);
+
   std::cout << varQS << " " << tipoVetor << " " << tam << " "
             << media_comp << " " << media_mov << " " << mediana_tempo
             << std::endl;

@@ -1,35 +1,31 @@
 #include "ordenadores.h"
 #include "geradores.h"
+#include "operacoes.h"
 #include "pilha.h"
 #include <iostream>
 #include <string>
 
-//escolhe o pivô de acordo com
-//a variação do quicksort escolhida
+//escolhe o pivô de acordo com a variação escolhida
 int escolhePivo(int* vetor, int esq, int dir, std::string varQS){
   if(varQS == "QM3"){
     //coloca os três candidatos a pivô num vetor
     int pivos[3] = {vetor[esq],
                     vetor[(esq+dir)/2],
                     vetor[dir]};
-
     //em partições com dois elementos,
     //serão feitas duas cópias do primeiro,
-    //logo, ele sempre será o escolhido para pivô
-
-    //ordena o vetor de pivôs
-    InsertionSort(pivos, 0, 2);
-
-    //o pivô escolhido é o do meio
-    return pivos[1];
+    //logo, ele sempre será o escolhido para pivô nesse caso
+    return mediana(pivos, 3);
 
   } else if(varQS == "QPE"){
-    return vetor[esq];
+      return vetor[esq];
   } else{
-    return vetor[(esq+dir)/2];
+      return vetor[(esq+dir)/2];
   }
 }
 
+//troca os elementos de modo que os menores que o pivô
+//fiquem à esquerda e os maiores, à direita
 void Particiona(int* vetor, int esq, int dir,
                 int* i, int* j, std::string varQS,
                 unsigned int* n_comp, unsigned int* n_mov){
@@ -83,6 +79,8 @@ void Ordena(int* vetor, int esq, int dir, std::string varQS,
     Ordena(vetor, i, dir, varQS, n_comp, n_mov);
 }
 
+//-------------- QUICKSORT CLÁSSICO, PE e M3 -------------------//
+
 void QuickSort(int* vetor, unsigned int tam, std::string varQS,
                unsigned int* n_comp, unsigned int* n_mov){
   Ordena(vetor, 0, tam-1, varQS, n_comp, n_mov);
@@ -98,9 +96,9 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
   if (varQS == "QI1"){
     k = 0.01;
   } else if(varQS == "QI5"){
-    k = 0.05;
+      k = 0.05;
   } else{
-    k = 0.1;
+      k = 0.1;
   }
 
   //particiona selecionando o pivô pela mediana de 3
@@ -110,10 +108,9 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
     //porcentagem representada pelo tamanho do subvetor [esq, j]
     //em relação ao vetor inteiro de tamanho tam
     float porcento = (float)(j-esq)/(float)tam;
-    //std::cout << "porcento: " << porcento << std::endl;
+
     //se a porcentagem for menor que k, ordena com insertion
     if (porcento < k){
-      //std::cout << "Insertion com " << porcento << "%" << std::endl;
       InsertionSort(vetor, esq, j);
     } else{
         OrdenaQuickInsertion(vetor, esq, j, tam, varQS, n_comp, n_mov);
@@ -123,10 +120,9 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
     //porcentagem representada pelo tamanho do subvetor [i, dir]
     //em relação ao vetor inteiro de tamanho tam
     float porcento = (float)(dir-i)/(float)tam;
-    //std::cout << "porcento: " << porcento << std::endl;
+
     //se a porcentagem for menor que k, ordena com insertion
     if (porcento < k){
-      //std::cout << "Insertion com " << porcento << "%" << std::endl;
       InsertionSort(vetor, i, dir);
     } else{
         OrdenaQuickInsertion(vetor, i, dir, tam, varQS, n_comp, n_mov);

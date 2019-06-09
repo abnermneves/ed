@@ -4,17 +4,10 @@
 #include <ctime>
 #include "geradores.h"
 
-void gerarAleatorio(int* vetor, unsigned int tam){
-  srand(time(NULL));
+void gerarAleatorio(int* vetor, unsigned int tam, unsigned int i){
+  srand(time(NULL)+i);
   for(unsigned int i = 0; i < tam; i++){
     vetor[i] = rand() % tam;
-  }
-}
-
-void gerarAleatorioEntre(int* vetor, unsigned int tam, int a, int b){
-  srand(time(NULL));
-  for(unsigned int i = 0; i < tam; i++){
-    vetor[i] = (rand() % b) + a;
   }
 }
 
@@ -30,9 +23,9 @@ void gerarOrdenadoDecrescente(int* vetor, unsigned int tam){
   }
 }
 
-void gerarVetor(int* vetor, unsigned int tam, std::string tipoVetor){
+void gerarVetor(int* vetor, unsigned int tam, std::string tipoVetor, unsigned int i){
   if(tipoVetor == "Ale"){
-    gerarAleatorio(vetor, tam);
+    gerarAleatorio(vetor, tam, i);
   } else if (tipoVetor == "OrdC"){
       gerarOrdenadoCrescente(vetor, tam);
   } else if (tipoVetor == "OrdD"){
