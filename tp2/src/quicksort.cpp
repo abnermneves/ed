@@ -1,5 +1,6 @@
 #include "ordenadores.h"
 #include "geradores.h"
+#include "pilha.h"
 #include <iostream>
 #include <string>
 
@@ -128,5 +129,28 @@ void QuickComInsertion(int* vetor, unsigned int tam, std::string varQS){
 
 //--------------------QUICKSORT NÃO RECURSIVO-------------------//
 void QuickNaoRecursivo(int* vetor, unsigned int tam){
-  
+  Pilha pilha = Pilha();
+  int esq, dir, i, j, iesq, idir;
+  esq = 0;
+  dir = tam-1;
+  pilha.empilha(esq, dir);
+
+  do {
+    if (dir > esq){
+      Particiona(vetor, esq, dir, &i, &j, "QC");
+      if ((j-esq) > (dir-i)){
+        idir = j;
+        iesq = esq;
+        pilha.empilha(iesq, idir);
+        esq = i;
+      } else {
+        iesq = i;
+        idir = dir;
+        pilha.empilha(iesq, idir);
+        dir = j;
+      }
+    } else {
+      pilha.desempilha(&esq, &dir);
+    }
+  } while(!pilha.vazia());
 }

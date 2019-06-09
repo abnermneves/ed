@@ -40,7 +40,9 @@ int main(int argc, char* argv[]){
       imprimir(vetor, tam);
       std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   } else if(varQS == "QNR"){
-
+    QuickNaoRecursivo(vetor, tam);
+    imprimir(vetor, tam);
+    std::cout << "Ordenado: " << estaOrdenado(vetor, tam) << std::endl;
   } else if(varQS == "IS"){
     InsertionSort(vetor, 0, tam-1);
     imprimir(vetor, tam);
