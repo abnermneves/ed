@@ -39,26 +39,3 @@ void gerarVetor(int* vetor, unsigned int tam, std::string tipoVetor){
       gerarOrdenadoDecrescente(vetor, tam);
   }
 }
-
-void imprimir(int* vetor, unsigned int tam){
-  for (unsigned int i = 0; i < tam; i++){
-    std::cout << vetor[i] << " ";
-  }
-  std::cout << std::endl << std::endl;
-}
-
-bool estaOrdenado(int* vetor, unsigned int tam){
-  bool ordenado = true;
-  for (unsigned int i = 0; i < tam-1; i++){
-    if(vetor[i] > vetor[i+1])
-      ordenado = false;
-  }
-  return ordenado;
-}
-
-int media(unsigned int* vetor, unsigned int tam){
-  int soma = 0;
-  for (unsigned int i = 0; i < tam; i++)
-    soma += vetor[i];
-  return soma/tam;
-}

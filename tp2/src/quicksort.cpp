@@ -140,6 +140,7 @@ void QuickComInsertion(int* vetor, unsigned int tam, std::string varQS,
 }
 
 //--------------------QUICKSORT NÃO RECURSIVO-------------------//
+
 void QuickNaoRecursivo(int* vetor, unsigned int tam,
                        unsigned int* n_comp, unsigned int* n_mov){
   Pilha pilha = Pilha();
