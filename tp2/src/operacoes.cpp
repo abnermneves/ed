@@ -27,7 +27,15 @@ int media(unsigned int* vetor, unsigned int tam){
 
 int mediana(int* vetor, unsigned int tam){
   InsertionSort(vetor, 0, tam-1);
+  if (tam % 2 == 0)
+    return (vetor[tam/2] + vetor[(tam/2)+1]) / 2;
+  else
+    return vetor[tam/2];
+}
 
+int mediana(int* vetor, unsigned int tam,
+            unsigned int* n_comp, unsigned int* n_mov){
+  InsertionSort(vetor, 0, tam-1, n_comp, n_mov);
   if (tam % 2 == 0)
     return (vetor[tam/2] + vetor[(tam/2)+1]) / 2;
   else
@@ -36,7 +44,6 @@ int mediana(int* vetor, unsigned int tam){
 
 double mediana(double* vetor, unsigned int tam){
   InsertionSort(vetor, 0, tam-1);
-
   if (tam % 2 == 0)
     return (vetor[tam/2] + vetor[(tam/2)+1]) / 2;
   else

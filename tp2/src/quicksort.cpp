@@ -6,7 +6,8 @@
 #include <string>
 
 //escolhe o pivô de acordo com a variação escolhida
-int escolhePivo(int* vetor, int esq, int dir, std::string varQS){
+int escolhePivo(int* vetor, int esq, int dir, std::string varQS,
+                unsigned int* n_comp, unsigned int* n_mov){
   if(varQS == "QM3"){
     //coloca os três candidatos a pivô num vetor
     int pivos[3] = {vetor[esq],
@@ -15,7 +16,7 @@ int escolhePivo(int* vetor, int esq, int dir, std::string varQS){
     //em partições com dois elementos,
     //serão feitas duas cópias do primeiro,
     //logo, ele sempre será o escolhido para pivô nesse caso
-    return mediana(pivos, 3);
+    return mediana(pivos, 3, n_comp, n_mov);
 
   } else if(varQS == "QPE"){
       return vetor[esq];
@@ -32,7 +33,7 @@ void Particiona(int* vetor, int esq, int dir,
   int aux, pivo;
   *i = esq;
   *j = dir;
-  pivo = escolhePivo(vetor, esq, dir, varQS);
+  pivo = escolhePivo(vetor, esq, dir, varQS, n_comp, n_mov);
   //std::cout << "pivo: " << pivo << std::endl;
   do{
     //encontra o primeiro elemento à esquerda do pivô
@@ -111,7 +112,7 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
 
     //se a porcentagem for menor que k, ordena com insertion
     if (porcento < k){
-      InsertionSort(vetor, esq, j);
+      InsertionSort(vetor, esq, j, n_comp, n_mov);
     } else{
         OrdenaQuickInsertion(vetor, esq, j, tam, varQS, n_comp, n_mov);
     }
@@ -123,7 +124,7 @@ void OrdenaQuickInsertion(int* vetor, int esq, int dir,
 
     //se a porcentagem for menor que k, ordena com insertion
     if (porcento < k){
-      InsertionSort(vetor, i, dir);
+      InsertionSort(vetor, i, dir, n_comp, n_mov);
     } else{
         OrdenaQuickInsertion(vetor, i, dir, tam, varQS, n_comp, n_mov);
     }
