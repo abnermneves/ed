@@ -1,12 +1,13 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 #include <ctime>
 #include "geradores.h"
 
 void gerarAleatorio(int* vetor, unsigned int tam){
   srand(time(NULL));
   for(unsigned int i = 0; i < tam; i++){
-    vetor[i] = rand();
+    vetor[i] = rand() % tam;
   }
 }
 
@@ -29,6 +30,16 @@ void gerarOrdenadoDecrescente(int* vetor, unsigned int tam){
   }
 }
 
+void gerarVetor(int* vetor, unsigned int tam, std::string tipoVetor){
+  if(tipoVetor == "Ale"){
+    gerarAleatorio(vetor, tam);
+  } else if (tipoVetor == "OrdC"){
+      gerarOrdenadoCrescente(vetor, tam);
+  } else if (tipoVetor == "OrdD"){
+      gerarOrdenadoDecrescente(vetor, tam);
+  }
+}
+
 void imprimir(int* vetor, unsigned int tam){
   for (unsigned int i = 0; i < tam; i++){
     std::cout << vetor[i] << " ";
@@ -43,4 +54,11 @@ bool estaOrdenado(int* vetor, unsigned int tam){
       ordenado = false;
   }
   return ordenado;
+}
+
+int media(unsigned int* vetor, unsigned int tam){
+  int soma = 0;
+  for (unsigned int i = 0; i < tam; i++)
+    soma += vetor[i];
+  return soma/tam;
 }
