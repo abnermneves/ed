@@ -141,26 +141,27 @@ void QuickComInsertion(int* vetor, unsigned int tam, std::string varQS,
 void QuickNaoRecursivo(int* vetor, unsigned int tam,
                        unsigned int* n_comp, unsigned int* n_mov){
   Pilha pilha = Pilha();
-  int esq, dir, i, j, iesq, idir;
+  int esq, dir, i, j;
   esq = 0;
   dir = tam-1;
   pilha.empilha(esq, dir);
 
   do {
+    //verifica se ainda não percorreu o (sub)vetor inteiro
     if (dir > esq){
       Particiona(vetor, esq, dir, &i, &j, "QC", n_comp, n_mov);
+
+      //empilha a partição que for maior e particiona a menor
       if((j-esq) > (dir-i)){
-        idir = j;
-        iesq = esq;
-        pilha.empilha(iesq, idir);
+        pilha.empilha(esq, j);
         esq = i;
       } else {
-          iesq = i;
-          idir = dir;
-          pilha.empilha(iesq, idir);
+          pilha.empilha(i, dir);
           dir = j;
       }
     } else {
+        //se já percorreu inteiro,
+        //então começa de novo na próxima partição
         pilha.desempilha(&esq, &dir);
     }
   } while(!pilha.vazia());
