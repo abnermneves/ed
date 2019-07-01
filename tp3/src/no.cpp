@@ -21,6 +21,8 @@ No* No::pesquisaR(std::string chave, int p){
     return this->esq->pesquisaR(chave, p+1);
   else if (this->dir)
     return this->dir->pesquisaR(chave, p+1);
+  else
+    return nullptr;
 }
 
 No* No::pesquisa(std::string chave){
