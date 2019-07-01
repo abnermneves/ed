@@ -1,50 +1,89 @@
+#include <iostream>
 #include "include/no.h"
 
 No::No(){
-
+  this->esq = nullptr;
+  this->dir = nullptr;
+  letra = NULL;
+  chave = nullptr;
 }
 
 No::~No(){
 
 }
 
-No* No::pesquisaR(No* t, std::string chave, int p){
-  if (t == nullptr)
+No* No::pesquisaR(std::string chave, int p){
+  if (this == nullptr)
     return nullptr;
-  if (t->get_esq() == nullptr && t->get_dir() == nullptr){
-    std::string noChave = t->get_chave();
-    if (noChave == chave){
-      return t;
-    }
-    else {
+  if (p == chave.size()){
+    std::string tChave = this->get_chave();
+    if (tChave == chave)
+      return this;
+    else
       return nullptr;
-    }
   }
-  if (chave[p] == 0)
+  if (chave[p] == '.')
+    return this->get_esq()->pesquisaR(chave, p+1);
+  else
+    return this->get_dir()->pesquisaR(chave, p+1);
 
-  return t;
 }
 
-No* No::pesquisa(No* trie, int chave){
-
-  return trie;
-}
-
-No* No::insereR(No* t, std::string letra, int p){
-
-  return t;
-}
-
-void No::insere(No** trie, std::string letra){
-
+No* No::pesquisa(std::string chave){
+  return pesquisaR(chave, 0);
 }
 
 No* No::separa(No* no1, No* no2, int p){
+  No* novo = new No();
+  char c1 = no1->chave[p];
+  char c2 = no2->chave[p];
 
-  return no1;
+  if (c1 == '.' && c2 == '.'){
+    novo->set_esq(separa(no1, no2, p+1));
+  } else if (c1 == '.' && c2 == '-'){
+      novo->set_esq(no1);
+      novo->set_dir(no2);
+  } else if (c1 == '-' && c2 == '.'){
+      novo->set_esq(no2);
+      novo->set_dir(no1);
+  } else if (c1 == '-' && c2 == '-'){
+      novo->set_dir(separa(no1, no2, p+1));
+  }
+
+  return novo;
 }
 
-void No::set_letra(std::string letra){
+No* No::insereR(char letra, std::string chave, int p){
+  /*if (this == nullptr){
+    return new No();
+  }*/
+  if (this->get_esq() == nullptr && this->get_dir() == nullptr){
+    No* vazio = new No();
+    return separa(vazio, this, p);
+  }
+  if (chave[p] == '.'){
+    this->set_esq(this->get_esq()->insereR(letra, chave, p+1));
+  }
+  else {
+    this->set_dir(this->get_dir()->insereR(letra, chave, p+1));
+  }
+
+  return this;
+}
+
+void No::insere(char letra, std::string chave){
+  this->insereR(letra, chave, 0);
+}
+
+void No::preOrdem(){
+  std::cout << this->letra << " " << this->chave << std::endl;
+  if(this->esq)
+    this->esq->preOrdem();
+  if (this->dir)
+    this->dir->preOrdem();
+}
+
+void No::set_letra(char letra){
   this->letra = letra;
 }
 
@@ -52,7 +91,7 @@ void No::set_chave(std::string chave){
   this->chave = chave;
 }
 
-std::string No::get_letra(){
+char No::get_letra(){
   return this->letra;
 }
 
@@ -66,4 +105,12 @@ No* No::get_esq(){
 
 No* No::get_dir(){
   return this->dir;
+}
+
+void No::set_esq(No* esq){
+  this->esq = esq;
+}
+
+void No::set_dir(No* dir){
+  this->dir = dir;
 }

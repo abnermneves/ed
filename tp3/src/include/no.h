@@ -7,20 +7,24 @@ class No {
 private:
   No* esq;
   No* dir;
-  std::string letra;
+  char letra;
   std::string chave;
 
 public:
   No();
   ~No();
-  No* pesquisaR(No* t, std::string chave, int p);
-  No* pesquisa(No* trie, int chave);
+  No* pesquisaR(std::string chave, int p);
+  No* pesquisa(std::string chave);
   No* separa(No* no1, No* no2, int p);
-  No* insereR(No* t, std::string letra, int p);
-  void insere(No** trie, std::string letra);
-  void set_letra(std::string letra);
+  No* insereR(char letra, std::string chave, int p);
+  void insere(char letra, std::string chave);
+  void preOrdem();
+
+  void set_letra(char letra);
   void set_chave(std::string chave);
-  std::string get_letra();
+  void set_esq(No* esq);
+  void set_dir(No* dir);
+  char get_letra();
   std::string get_chave();
   No* get_esq();
   No* get_dir();
