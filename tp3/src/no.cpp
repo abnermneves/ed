@@ -20,16 +20,16 @@ No* No::pesquisaR(std::string chave, int p){
       return nullptr;
     if (this->esq->chave == chave)
       return this->esq;
-      
+
     if (!this->dir)
       return nullptr;
     if (this->dir->chave == chave)
       return this->dir
   }
   if (chave[p] == '.')
-    return this->get_esq()->pesquisaR(chave, p+1);
+    return this->esq->pesquisaR(chave, p+1);
   else
-    return this->get_dir()->pesquisaR(chave, p+1);
+    return this->dir->pesquisaR(chave, p+1);
 
 }
 
