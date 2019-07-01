@@ -13,14 +13,18 @@ No::~No(){
 }
 
 No* No::pesquisaR(std::string chave, int p){
-  if (this == nullptr)
-    return nullptr;
-  if (p == chave.size()){
-    std::string tChave = this->get_chave();
-    if (tChave == chave)
-      return this;
-    else
+  /*if (this == nullptr)
+    return nullptr;*/
+  if (p == chave.size()-1){
+    if (!this->esq)
       return nullptr;
+    if (this->esq->chave == chave)
+      return this->esq;
+      
+    if (!this->dir)
+      return nullptr;
+    if (this->dir->chave == chave)
+      return this->dir
   }
   if (chave[p] == '.')
     return this->get_esq()->pesquisaR(chave, p+1);
@@ -30,7 +34,7 @@ No* No::pesquisaR(std::string chave, int p){
 }
 
 No* No::pesquisa(std::string chave){
-  return pesquisaR(chave, 0);
+  return this->pesquisaR(chave, 0);
 }
 
 No* No::separa(No* no1, No* no2, int p){
