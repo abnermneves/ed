@@ -16,7 +16,7 @@ public:
   No* pesquisaR(std::string chave, int p);
   No* pesquisa(std::string chave);
   No* separa(No* no1, No* no2, int p);
-  No* insereR(char letra, std::string chave, int p);
+  void insereR(char letra, std::string chave, int p);
   void insere(char letra, std::string chave);
   void preOrdem();
 

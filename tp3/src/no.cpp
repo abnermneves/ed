@@ -4,8 +4,8 @@
 No::No(){
   this->esq = nullptr;
   this->dir = nullptr;
-  letra = NULL;
-  chave = nullptr;
+  this->letra = '\0';
+  this->chave = "";
 }
 
 No::~No(){
@@ -49,22 +49,23 @@ No* No::separa(No* no1, No* no2, int p){
   return novo;
 }
 
-No* No::insereR(char letra, std::string chave, int p){
-  /*if (this == nullptr){
-    return new No();
-  }*/
-  if (this->get_esq() == nullptr && this->get_dir() == nullptr){
-    No* vazio = new No();
-    return separa(vazio, this, p);
+void No::insereR(char letra, std::string chave, int p){
+  if (p == chave.size()){
+    this->letra = letra;
+    this->chave = chave;
+    return;
   }
   if (chave[p] == '.'){
-    this->set_esq(this->get_esq()->insereR(letra, chave, p+1));
+    if (!this->esq)
+      this->esq = new No();
+    this->esq->insereR(letra, chave, p+1);
   }
   else {
-    this->set_dir(this->get_dir()->insereR(letra, chave, p+1));
+    if (!this->dir)
+      this->dir = new No();
+    this->dir->insereR(letra, chave, p+1);
   }
 
-  return this;
 }
 
 void No::insere(char letra, std::string chave){
