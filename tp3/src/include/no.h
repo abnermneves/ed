@@ -13,11 +13,11 @@ private:
 public:
   No();
   ~No();
-  No* pesquisaR(std::string chave, int p);
-  No* pesquisa(std::string chave);
+  No* pesquisaR(No* t, std::string chave, int p);
+  No* pesquisa(No* trie, std::string chave);
   No* separa(No* no1, No* no2, int p);
-  No* insereR(char letra, std::string chave, int p);
-  void insere(char letra, std::string chave);
+  No* insereR(No* t, char letra, std::string chave, int p);
+  void insere(No** trie, char letra, std::string chave);
   void preOrdem();
 
   void set_letra(char letra);

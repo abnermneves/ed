@@ -12,25 +12,25 @@ No::~No(){
 
 }
 
-No* No::pesquisaR(std::string chave, int p){
-  if (this == nullptr)
+No* No::pesquisaR(No* t, std::string chave, int p){
+  if (t == nullptr)
     return nullptr;
   if (p == chave.size()){
-    std::string tChave = this->get_chave();
+    std::string tChave = t->get_chave();
     if (tChave == chave)
-      return this;
+      return t;
     else
       return nullptr;
   }
   if (chave[p] == '.')
-    return this->get_esq()->pesquisaR(chave, p+1);
+    return pesquisaR(t->get_esq(), chave, p+1);
   else
-    return this->get_dir()->pesquisaR(chave, p+1);
+    return pesquisaR(t->get_dir(), chave, p+1);
 
 }
 
-No* No::pesquisa(std::string chave){
-  return pesquisaR(chave, 0);
+No* No::pesquisa(No* trie, std::string chave){
+  return pesquisaR(trie, chave, 0);
 }
 
 No* No::separa(No* no1, No* no2, int p){
@@ -53,26 +53,26 @@ No* No::separa(No* no1, No* no2, int p){
   return novo;
 }
 
-No* No::insereR(char letra, std::string chave, int p){
-  /*if (this == nullptr){
+No* No::insereR(No* t, char letra, std::string chave, int p){
+  if (t == nullptr){
     return new No();
-  }*/
-  if (this->get_esq() == nullptr && this->get_dir() == nullptr){
+  }
+  if (t->get_esq() == nullptr && t->get_dir() == nullptr){
     No* vazio = new No();
-    return separa(vazio, this, p);
+    return separa(vazio, t, p);
   }
   if (chave[p] == '.'){
-    this->set_esq(this->get_esq()->insereR(letra, chave, p+1));
+    t->set_esq(insereR(t->get_esq(), letra, chave, p+1));
   }
   else {
-    this->set_dir(this->get_dir()->insereR(letra, chave, p+1));
+    t->set_dir(insereR(t->get_dir(), letra, chave, p+1));
   }
 
-  return this;
+  return t;
 }
 
-void No::insere(char letra, std::string chave){
-  this->insereR(letra, chave, 0);
+void No::insere(No** trie, char letra, std::string chave){
+  *trie = insereR(*trie, letra, chave, 0);
 }
 
 void No::preOrdem(){
