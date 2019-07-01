@@ -42,7 +42,7 @@ void Particiona(int* vetor, int esq, int dir,
       (*n_comp)++;
       (*i)++;
     }
-    (*n_comp)++;
+    (*n_comp)++; //pra contar a comparação que quebra o loop
 
     //encontra o primeiro elemento à direita do pivô
     //que é menor ou igual a ele
@@ -50,7 +50,7 @@ void Particiona(int* vetor, int esq, int dir,
       (*n_comp)++;
       (*j)--;
     }
-    (*n_comp)++;
+    (*n_comp)++; //pra contar a comparação que quebra o loop
 
     //troca os dois de lugares se i e j
     //ainda não tiverem passado pela partição inteira
