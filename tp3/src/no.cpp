@@ -9,14 +9,30 @@ No::No(){
 }
 
 No::~No(){
-
+  if(this->esq)
+    delete this->esq;
+  if(this->dir)
+    delete this->dir;
 }
 
+//-------------------------PESQUISA--------------------------//
+
 No* No::pesquisaR(std::string chave, int p){
+  //como as letras não ficam apenas nas folhas, é preciso
+  //verificar se já está no último char do código buscado.
+  //se estiver e o código tiver sido encontrado,
+  //então retorna o nó atual. se não, retorna nullptr
   if (p == chave.size()){
     if (this->chave == chave)
       return this;
+    else
+      return nullptr;
   }
+
+  //se o nó da esquerda existe e o char atual do código buscado é um ponto
+  //então procura com o próximo char na subárvore da esquerda.
+  //se o char atual é um traço e o nó da direita existe,
+  //então procura com o próximo char na subárvore da esquerda.
   if (this->esq && chave[p] == '.')
     return this->esq->pesquisaR(chave, p+1);
   else if (this->dir)
@@ -25,36 +41,27 @@ No* No::pesquisaR(std::string chave, int p){
     return nullptr;
 }
 
+//chama o método recursivo de pesquisa para a raiz da árvore
 No* No::pesquisa(std::string chave){
   return this->pesquisaR(chave, 0);
 }
 
-No* No::separa(No* no1, No* no2, int p){
-  No* novo = new No();
-  char c1 = no1->chave[p];
-  char c2 = no2->chave[p];
-
-  if (c1 == '.' && c2 == '.'){
-    novo->set_esq(separa(no1, no2, p+1));
-  } else if (c1 == '.' && c2 == '-'){
-      novo->set_esq(no1);
-      novo->set_dir(no2);
-  } else if (c1 == '-' && c2 == '.'){
-      novo->set_esq(no2);
-      novo->set_dir(no1);
-  } else if (c1 == '-' && c2 == '-'){
-      novo->set_dir(separa(no1, no2, p+1));
-  }
-
-  return novo;
-}
+//-------------------------INSERE-----------------------------//
 
 void No::insereR(char letra, std::string chave, int p){
+  //se já desceu na árvore tanto quanto o número de char precisa
+  //então insere a letra e a chave no nó atual
   if (p == chave.size()){
     this->letra = letra;
     this->chave = chave;
     return;
   }
+
+  //se ainda falta char para ser percorrido no código
+  //verifica se o próximo é um ponto ou traço
+  //e insere na subárvore da esquerda ou da direita,
+  //sendo que, se o nó adequado ainda não existir,
+  //então ele é criado
   if (chave[p] == '.'){
     if (!this->esq)
       this->esq = new No();
@@ -68,18 +75,28 @@ void No::insereR(char letra, std::string chave, int p){
 
 }
 
+//chama o método recursivo de inserir para a raiz da árvore
 void No::insere(char letra, std::string chave){
   this->insereR(letra, chave, 0);
 }
 
+//-------------------------PRE-ORDEM---------------------------//
+
+//imprime o elemento do nó atual e depois passa para os filhos
 void No::preOrdem(){
+  //só imprime se o nó realmente tiver uma letra e código
+  //ie, se o tamanho da chave é diferente de zero
   if(this->chave.size())
     std::cout << this->letra << " " << this->chave << std::endl;
+
+  //e agora chama o método recursivo para os nós filhos
   if(this->esq)
     this->esq->preOrdem();
   if (this->dir)
     this->dir->preOrdem();
 }
+
+//---------------------SETTERS E GETTERS-----------------------//
 
 void No::set_letra(char letra){
   this->letra = letra;
