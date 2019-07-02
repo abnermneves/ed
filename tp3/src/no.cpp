@@ -73,7 +73,8 @@ void No::insere(char letra, std::string chave){
 }
 
 void No::preOrdem(){
-  std::cout << this->letra << " " << this->chave << std::endl;
+  if(this->chave.size())
+    std::cout << this->letra << " " << this->chave << std::endl;
   if(this->esq)
     this->esq->preOrdem();
   if (this->dir)
