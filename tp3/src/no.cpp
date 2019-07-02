@@ -1,6 +1,8 @@
 #include <iostream>
 #include "include/no.h"
 
+//-----------------------CONSTRUTOR E DESTRUTOR---------------------//
+
 No::No(){
   this->esq = nullptr;
   this->dir = nullptr;
@@ -17,7 +19,7 @@ No::~No(){
 
 //-------------------------PESQUISA--------------------------//
 
-No* No::pesquisaR(std::string chave, int p){
+No* No::pesquisaR(std::string chave, unsigned int p){
   //como as letras não ficam apenas nas folhas, é preciso
   //verificar se já está no último char do código buscado.
   //se estiver e o código tiver sido encontrado,
@@ -48,7 +50,7 @@ No* No::pesquisa(std::string chave){
 
 //-------------------------INSERE-----------------------------//
 
-void No::insereR(char letra, std::string chave, int p){
+void No::insereR(char letra, std::string chave, unsigned int p){
   //se já desceu na árvore tanto quanto o número de char precisa
   //então insere a letra e a chave no nó atual
   if (p == chave.size()){
@@ -90,9 +92,10 @@ void No::preOrdem(){
     std::cout << this->letra << " " << this->chave << std::endl;
 
   //e agora chama o método recursivo para os nós filhos
+  //se eles existirem
   if(this->esq)
     this->esq->preOrdem();
-  if (this->dir)
+  if(this->dir)
     this->dir->preOrdem();
 }
 

@@ -36,6 +36,15 @@ int main(int argc, char* argv[]){
     }
     std::cout << std::endl;
   }
+
+  //se o número de parâmetros é 2 e o segundo é -a
+  //então imprime a árvore em pré-ordem
+  if (argc == 2){
+    if (std::string(argv[1]) == "-a"){
+      trie->preOrdem();
+    }
+  }
+
   trie->~No();
   return 0;
 }
